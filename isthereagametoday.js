@@ -30,7 +30,7 @@ var load_teams = ['sfgiants', 'pirates', 'indians'];
 var load_games_data = function(team, store){
     var games = [];
 
-    fs.readFile(data_year + "_" + team + '.csv', 'UTF-8', function(err, contents){
+    fs.readFile(__dirname + "/schedules/" + data_year + "_" + team + '.csv', 'UTF-8', function(err, contents){
         if (!err){
             _.each(contents.split("\n"), function(line, i){
                 games.push(line.split(","));
