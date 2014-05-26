@@ -2,15 +2,14 @@
 // @codekit-prepend "../bower_components/underscore/underscore.js";
 
 var team_name = ""
-    ,games_feed = '/games-data/'
+    ,games_feed = '/games-data'
     ,hours_in_1_day = 3600*60*24
 ;
 
 var get_games = function(){
     $.ajax({
         type:'GET'
-        // ,url: games_feed
-        ,url: '/games-data'
+        ,url: games_feed
         ,dataType: 'json'
         ,success: function(msg){
             var rows = msg
@@ -127,6 +126,6 @@ function isThereAGameToday(data){
 
 $(function(){
     team_name = $('input[name=team_name]').val();
-    games_feed += team_name;
+    games_feed = $('input[name=games_url]').val();
     get_games();
 });

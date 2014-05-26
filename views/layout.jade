@@ -15,6 +15,12 @@ html
         script(type="text/javascript", src="/javascripts/min/main.min.js")
         script(type="text/javascript", src="/javascripts/coffee/main.js")
 
+        link(rel="shortcut icon", href="/images/favicon_" + team_name + ".ico?v=" + favicon_version, type="image/x-icon")
+        link(rel="icon", href="/images/favicon_" + team_name + ".ico?v=" + favicon_version, type="image/x-icon")
+
+        //- if process.env.NODE_ENV == 'production'
+            //- include partials/tracking.js
+
     body
         block content
             .Three-Dee(style='display: block;')
@@ -27,3 +33,4 @@ html
                     block social
 
         input(type="hidden", name="team_name", value=team_name)
+        input(type="hidden", name="games_url", value=(process.env.NODE_ENV == "production" ? "/games-data" : "/games-data/" + team_name))
