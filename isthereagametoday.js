@@ -14,7 +14,7 @@ var _ = require('underscore');
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3035);
+app.set('port', 3035);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -25,15 +25,30 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-var sfgiants_games = [];
-fs.readFile('2014_sfgiants.csv', 'UTF-8', function(err, contents){
-    if (!err){
-        _.each(contents.split("\n"), function(line, i){
-            // if (i > 0){
-                sfgiants_games.push(line.split(","));
-            // }
-        });
+var data_year = "2014";
+var teams_data = {};
+var load_teams = ['sfgiants', 'pirates', 'indians'];
+
+var load_games_data = function(team, store){
+    var games = [];
+
+    fs.readFile(data_year + "_" + team + '.csv', 'UTF-8', function(err, contents){
+        if (!err){
+            _.each(contents.split("\n"), function(line, i){
+                games.push(line.split(","));
+            });
+        }
+    });
+
+    if (store){
+        teams_data[team] = games;
     }
+
+    return games;
+};
+
+_.each(load_teams, function(team){
+    load_games_data(team, true);
 });
 
 // development only
@@ -41,10 +56,32 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', function(req, res){
+    res.render('sfgiants', {
+        title: 'Are the San Francisco Giants Playing Today?'
+        ,team_name: 'sfgiants'
+        ,meta_description: 'Find out if the San Francisco Giants are playing a baseball game today!'
+    });
+});
 
-app.get('/games-data/sfgiants', function(req, res){
-    res.json(sfgiants_games);
+app.get('/:team', function(req, res){
+    var team = req.params.team.toLowerCase();
+    if (_.indexOf(_.keys(teams_data), team) > -1){
+        res.render(team, {
+            title: 'Are the San Francisco Giants Playing Today?'
+            ,team_name: team
+            ,meta_description: 'Find out if the San Francisco Giants are playing a baseball game today!'
+        });
+    }
+});
+
+app.get('/games-data/:team', function(req, res){
+    if (_.indexOf(_.keys(teams_data), req.params.team.toLowerCase()) > -1){
+        res.json(teams_data[req.params.team.toLowerCase()]);
+    }
+    else{
+        res.json({ error: 'not found' });
+    }
 });
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -1,5 +1,5 @@
 html {
-  background: url('/images/sfgiants.jpg') no-repeat center center fixed #ef5e00;
+  background: url('/images/indians.jpg') no-repeat center center fixed #c80810;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -17,12 +17,14 @@ h1 {
   padding: 0 20px 0 20px;
 }
 #game-details {
-  color: #451b00;
+  color: #003366;
   font-size: 20px;
   line-height: 26px;
+  font-family: Helvetica Neue;
   font-weight: bold;
   font-weight: normal;
   padding: 0 10px 0 10px;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
 }
 .Three-Dee {
   line-height: 1em;
@@ -34,7 +36,7 @@ h1 {
   display: none;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0px 0px 0 #451b00, 1px 1px 0 #451b00, 2px 2px 0 #451b00, 3px 3px 0 #451b00, 4px 4px 0 #451b00, 5px 5px 0 #451b00, 6px 6px 0 #451b00, 7px 7px 0 #451b00, 8px 8px 0 #451b00, 9px 9px 0 #451b00, 10px 10px 0 #451b00, 11px 11px 0 #451b00, 12px 12px 0 #451b00, 13px 13px 0 #451b00, 14px 14px 0 #451b00, 15px 15px 0 #451b00, 16px 16px 0 #451b00, 17px 17px 0 #451b00, 18px 18px 0 #451b00, 19px 19px 0 #451b00, 20px 20px 0 #451b00, 21px 21px 0 #451b00;
+  text-shadow: 0px 0px 0 #003366, 1px 1px 0 #003366, 2px 2px 0 #003366, 3px 3px 0 #003366, 4px 4px 0 #003366, 5px 5px 0 #003366, 6px 6px 0 #003366, 7px 7px 0 #003366, 8px 8px 0 #003366, 9px 9px 0 #003366, 10px 10px 0 #003366, 11px 11px 0 #003366, 12px 12px 0 #003366, 13px 13px 0 #003366, 14px 14px 0 #003366, 15px 15px 0 #003366, 16px 16px 0 #003366, 17px 17px 0 #003366, 18px 18px 0 #003366, 19px 19px 0 #003366, 20px 20px 0 #003366, 21px 21px 0 #003366;
 }
 .loading-text {
   text-transform: none;

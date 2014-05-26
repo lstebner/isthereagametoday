@@ -1,0 +1,19 @@
+[
+    {
+        "name": "San Francisco Giants"
+        ,"slug": "sfgiants"
+        ,"hashtag": "#SFGiants"
+    }
+    ,
+    {
+        "name": "Pittsburgh Pirates"
+        ,"slug": "pirates"
+        ,"hashtag": "#pirates"
+    }
+    ,
+    {
+        "name": "Cleveland Indians"
+        ,"slug": "indians"
+        ,"hashtag": "#indians"
+    }
+]

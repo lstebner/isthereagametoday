@@ -1,5 +1,8 @@
+@bg_color: @primary_color;
+@details_color: @secondary_color;
+
 html { 
-    background: url(/images/bg.jpg) no-repeat center center fixed #ef5e00; 
+    background: url(@bg_image) no-repeat center center fixed @bg_color; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -20,12 +23,14 @@ h1 {
 }
 
 #game-details {
-    color:#451b00;
+    color: @details_color;
     font-size:20px; 
     line-height:26px; 
+    font-family: Helvetica Neue;
     font-weight:bold; 
     font-weight:normal;
     padding:0 10px 0 10px;
+    text-shadow: 1px 1px 1px fade(@third_color, 50%);
 }
 
 .Three-Dee{
@@ -38,34 +43,34 @@ h1 {
     display:none;
     text-align:center;
     text-transform:uppercase;
-    text-shadow:0px 0px 0 rgb(0, 0, 0),
-                1px 1px 0 rgb(0, 0, 0),
-                2px 2px 0 rgb(0, 0, 0),
-                3px 3px 0 rgb(0, 0, 0),
-                4px 4px 0 rgb(0, 0, 0),
-                5px 5px 0 rgb(0, 0, 0),
-                6px 6px 0 rgb(0, 0, 0),
-                7px 7px 0 rgb(0, 0, 0),
-                8px 8px 0 rgb(0, 0, 0),
-                9px 9px 0 rgb(0, 0, 0),
-                10px 10px 0 rgb(0, 0, 0),
-                11px 11px 0 rgb(0, 0, 0),
-                12px 12px 0 rgb(0, 0, 0),
-                13px 13px 0 rgb(0, 0, 0),
-                14px 14px 0 rgb(0, 0, 0),
-                15px 15px 0 rgb(0, 0, 0),
-                16px 16px 0 rgb(0, 0, 0),
-                17px 17px 0 rgb(0, 0, 0),
-                18px 18px 0 rgb(0, 0, 0),
-                19px 19px 0 rgb(0, 0, 0),
-                20px 20px 0 rgb(0, 0, 0),
-                21px 21px 0 rgb(0, 0, 0);
+    text-shadow:0px 0px 0 @details_color,
+                1px 1px 0 @details_color,
+                2px 2px 0 @details_color,
+                3px 3px 0 @details_color,
+                4px 4px 0 @details_color,
+                5px 5px 0 @details_color,
+                6px 6px 0 @details_color,
+                7px 7px 0 @details_color,
+                8px 8px 0 @details_color,
+                9px 9px 0 @details_color,
+                10px 10px 0 @details_color,
+                11px 11px 0 @details_color,
+                12px 12px 0 @details_color,
+                13px 13px 0 @details_color,
+                14px 14px 0 @details_color,
+                15px 15px 0 @details_color,
+                16px 16px 0 @details_color,
+                17px 17px 0 @details_color,
+                18px 18px 0 @details_color,
+                19px 19px 0 @details_color,
+                20px 20px 0 @details_color,
+                21px 21px 0 @details_color;
 }
 
 .loading-text{
     text-transform: none;
     text-shadow: none;
-    color: #d8d8d8;
+    color: rgba(155, 155, 155, .5);
     font-size: 28px;
 }
 

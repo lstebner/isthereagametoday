@@ -1,5 +1,5 @@
 html {
-  background: url('/images/sfgiants.jpg') no-repeat center center fixed #ef5e00;
+  background: url('/images/sfgiants.jpg') no-repeat center center fixed #ffbf00;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -17,12 +17,14 @@ h1 {
   padding: 0 20px 0 20px;
 }
 #game-details {
-  color: #451b00;
+  color: #000000;
   font-size: 20px;
   line-height: 26px;
+  font-family: Helvetica Neue;
   font-weight: bold;
   font-weight: normal;
   padding: 0 10px 0 10px;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
 }
 .Three-Dee {
   line-height: 1em;
@@ -34,7 +36,7 @@ h1 {
   display: none;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0px 0px 0 #451b00, 1px 1px 0 #451b00, 2px 2px 0 #451b00, 3px 3px 0 #451b00, 4px 4px 0 #451b00, 5px 5px 0 #451b00, 6px 6px 0 #451b00, 7px 7px 0 #451b00, 8px 8px 0 #451b00, 9px 9px 0 #451b00, 10px 10px 0 #451b00, 11px 11px 0 #451b00, 12px 12px 0 #451b00, 13px 13px 0 #451b00, 14px 14px 0 #451b00, 15px 15px 0 #451b00, 16px 16px 0 #451b00, 17px 17px 0 #451b00, 18px 18px 0 #451b00, 19px 19px 0 #451b00, 20px 20px 0 #451b00, 21px 21px 0 #451b00;
+  text-shadow: 0px 0px 0 #000000, 1px 1px 0 #000000, 2px 2px 0 #000000, 3px 3px 0 #000000, 4px 4px 0 #000000, 5px 5px 0 #000000, 6px 6px 0 #000000, 7px 7px 0 #000000, 8px 8px 0 #000000, 9px 9px 0 #000000, 10px 10px 0 #000000, 11px 11px 0 #000000, 12px 12px 0 #000000, 13px 13px 0 #000000, 14px 14px 0 #000000, 15px 15px 0 #000000, 16px 16px 0 #000000, 17px 17px 0 #000000, 18px 18px 0 #000000, 19px 19px 0 #000000, 20px 20px 0 #000000, 21px 21px 0 #000000;
 }
 .loading-text {
   text-transform: none;
