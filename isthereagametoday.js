@@ -1,3 +1,5 @@
+var FAVICON_VERSION=2;
+
 /**
  * Module dependencies.
  */
@@ -25,7 +27,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var data_year = "2014";
 var teams_data = {};
-var load_teams = ['sfgiants', 'pirates', 'indians'];
+
+fs.readFile(__dirname + '/teams_data.json', function(err, contents){
+    if (!err){
+        var data = JSON.parse(contents);
+
+        if (data){
+            _.each(data, function(tdata){
+                teams_data[tdata.slug] = _.extend({schedule:[]}, tdata);
+                load_games_data(tdata.slug, true);
+            });
+        }
+    }
+});
 
 var load_games_data = function(team, store){
     var games = [];
@@ -39,15 +53,15 @@ var load_games_data = function(team, store){
     });
 
     if (store){
-        teams_data[team] = games;
+        if (!_.has(teams_data, team)){
+            teams_data[team] = {};
+        }
+
+        teams_data[team].schedule = games;
     }
 
     return games;
 };
-
-_.each(load_teams, function(team){
-    load_games_data(team, true);
-});
 
 // development only
 if ('development' == app.get('env')) {
@@ -65,15 +79,17 @@ app.get('/:team', function(req, res){
             title: 'Are the ' + team_data.name + ' Playing Today?'
             ,base_url: 'http://' + req.headers.host
             ,team_name: team //poorly named, this is really the slug used for javascript stuff
-            ,team_data: team_data
+            ,team_data: _.omit(team_data, 'schedule')
             ,meta_description: 'Find out if the ' + team_data.name + ' are playing a baseball game today!'
+            ,favicon_version: FAVICON_VERSION
         });
     }
 });
 
 app.get('/games-data/:team', function(req, res){
-    if (_.indexOf(_.keys(teams_data), req.params.team.toLowerCase()) > -1){
-        res.json(teams_data[req.params.team.toLowerCase()]);
+    var team_name = req.params.team.toLowerCase()
+    if (_.indexOf(_.keys(teams_data), team_name) > -1){
+        res.json(teams_data[team_name].schedule);
     }
     else{
         res.json({ error: 'not found' });
@@ -82,7 +98,7 @@ app.get('/games-data/:team', function(req, res){
 
 app.get('/', function(req, res){
     res.render('listing', {
-        teams: load_teams
+        teams: _.keys(teams_data)
     });
 });
 
