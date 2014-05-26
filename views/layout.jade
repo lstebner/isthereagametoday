@@ -1,10 +1,10 @@
 doctype html
 html
     head
-        meta(property='og:image', content='http://www.arethegiantsplayingtoday.com/SF-Giants-Logo.jpg')
+        meta(property='og:image', content=base_url + '/' + team_name + '/logo.jpg')
         meta(property='og:title', content=title)
         meta(property='og:description', content=meta_description)
-        meta(property='og:url', content='http://www.arethegiantsplayingtoday.com')
+        meta(property='og:url', content=base_url)
         meta(property='og:type', content='website')
         meta(name='title', content=title)
         meta(name='description', content=meta_description)
@@ -15,8 +15,8 @@ html
         script(type="text/javascript", src="/javascripts/min/main.min.js")
         script(type="text/javascript", src="/javascripts/coffee/main.js")
 
-        link(rel="shortcut icon", href="/images/favicon_" + team_name + ".ico?v=" + favicon_version, type="image/x-icon")
-        link(rel="icon", href="/images/favicon_" + team_name + ".ico?v=" + favicon_version, type="image/x-icon")
+        link(rel="shortcut icon", href="/images/teams/" + team_name + "favicon.ico?v=" + favicon_version, type="image/x-icon")
+        link(rel="icon", href="/images/teams/" + team_name + "/favicon.ico?v=" + favicon_version, type="image/x-icon")
 
         //- if process.env.NODE_ENV == 'production'
             //- include partials/tracking.js
@@ -30,7 +30,17 @@ html
 
             #footer
                 #social-media
-                    block social
+                    .facebook
+                        iframe(src='//www.facebook.com/plugins/like.php?href=' + base_url + '&width=55&layout=box_count&action=like&show_faces=false&share=false&height=65', scrolling='no', frameborder='0', style='border: none; overflow: hidden; width: 55px; height: 65px;', allowtransparency='true')
+                    .twitter
+                        a.twitter-share-button(href='https://twitter.com/share', data-url=base_url, data-text='Are the ' + team_data.hashtag + ' playing today?', data-related='zoinc', data-count='vertical')
+                        script.
+                            tbn = function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}};//(document, 'script', 'twitter-wjs');
+                    .google
+                        .g-plus(data-action='share', data-annotation='vertical-bubble', data-height='60', data-href=base_url)
+                        script(type='text/javascript').
+                            (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/platform.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();
+
 
         input(type="hidden", name="team_name", value=team_name)
         input(type="hidden", name="games_url", value=(process.env.NODE_ENV == "production" ? "/games-data" : "/games-data/" + team_name))

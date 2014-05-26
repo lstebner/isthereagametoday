@@ -56,11 +56,17 @@ if ('development' == app.get('env')) {
 
 app.get('/:team', function(req, res){
     var team = req.params.team.toLowerCase();
+    var team_data = {};
+
     if (_.indexOf(_.keys(teams_data), team) > -1){
-        res.render(team, {
-            title: 'Are the San Francisco Giants Playing Today?'
-            ,team_name: team
-            ,meta_description: 'Find out if the San Francisco Giants are playing a baseball game today!'
+        team_data = teams_data[team];
+
+        res.render('index', {
+            title: 'Are the ' + team_data.name + ' Playing Today?'
+            ,base_url: 'http://' + req.headers.host
+            ,team_name: team //poorly named, this is really the slug used for javascript stuff
+            ,team_data: team_data
+            ,meta_description: 'Find out if the ' + team_data.name + ' are playing a baseball game today!'
         });
     }
 });
