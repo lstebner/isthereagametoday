@@ -2,6 +2,7 @@
 // @codekit-prepend "../bower_components/underscore/underscore.js";
 
 var team_name = ""
+    ,team_data = {}
     ,games_feed = '/games-data'
     ,hours_in_1_day = 3600*60*24
 ;
@@ -45,7 +46,7 @@ function isThereAGameToday(data){
         ,start_minutes = 0
         ,start_time = ''
         ,is_there = 'No'
-        ,tweet_text = 'Are the #SFGiants playing today? '
+        ,tweet_text = 'Are the ' + team_data.hashtag + ' playing today? '
         ,details = ''
     ;
 
@@ -61,7 +62,7 @@ function isThereAGameToday(data){
             if (end_date.getHours() > now.getHours() || (end_date.getHours() == now.getHours() && end_date.getMinutes() > now.getMinutes())){
                 if (start_date.getHours() <= now.getHours() && start_date.getMinutes() <= now.getMinutes()){
                     details = 'they\'re playing right now at ' + data[i].location + ' against the ' + data[i].against + '!';
-                    tweet_text += ' Right now against the ' + data[i].against;
+                    tweet_text += ' Right now against the ' + data[i].against + '! ' + team_data.hashtag_during_game;
                 }
                 else{
                     start_hours = (start_date.getHours() > 12 ? start_date.getHours() - 12 : start_date.getHours());
@@ -126,6 +127,7 @@ function isThereAGameToday(data){
 
 $(function(){
     team_name = $('input[name=team_name]').val();
+    team_data = JSON.parse($('input[name=team_data]').val());
     games_feed = $('input[name=games_url]').val();
     get_games();
 });
