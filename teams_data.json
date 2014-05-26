@@ -4,6 +4,7 @@
         ,"slug": "sfgiants"
         ,"hashtag": "#SFGiants"
         ,"hashtag_during_game": "#GoGiants"
+        ,"tracking_code": "UA-722424-30"
     }
     ,
     {
@@ -11,6 +12,7 @@
         ,"slug": "pirates"
         ,"hashtag": "#Pirates"
         ,"hashtag_during_game": "#LetsGoBucs"
+        ,"tracking_code": "UA-8344152-11"
     }
     ,
     {
@@ -18,5 +20,6 @@
         ,"slug": "indians"
         ,"hashtag": "#Indians"
         ,"hashtag_during_game": "#GoTribe"
+        ,"tracking_code": "UA-8344152-12"
     }
 ]

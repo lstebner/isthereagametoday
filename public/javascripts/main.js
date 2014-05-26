@@ -130,4 +130,9 @@ $(function(){
     team_data = JSON.parse($('input[name=team_data]').val());
     games_feed = $('input[name=games_url]').val();
     get_games();
+
+    if (send_tracking){
+        ga('create', team_data.tracking_code, window.location.href);
+        ga('send', 'pageview');
+    }
 });

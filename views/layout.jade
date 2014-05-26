@@ -18,8 +18,13 @@ html
         link(rel="shortcut icon", href="/images/teams/" + team_name + "favicon.ico?v=" + favicon_version, type="image/x-icon")
         link(rel="icon", href="/images/teams/" + team_name + "/favicon.ico?v=" + favicon_version, type="image/x-icon")
 
-        //- if process.env.NODE_ENV == 'production'
-            //- include partials/tracking.js
+        if process.env.NODE_ENV == 'production'
+            include tracking.jade
+            script.
+                send_tracking = true;
+        else
+            script.
+                send_tracking = false;
 
     body
         block content
