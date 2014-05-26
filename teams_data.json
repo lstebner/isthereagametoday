@@ -3,17 +3,20 @@
         "name": "San Francisco Giants"
         ,"slug": "sfgiants"
         ,"hashtag": "#SFGiants"
+        ,"hashtag_during_game": "#GoGiants"
     }
     ,
     {
         "name": "Pittsburgh Pirates"
         ,"slug": "pirates"
-        ,"hashtag": "#pirates"
+        ,"hashtag": "#Pirates"
+        ,"hashtag_during_game": "#LetsGoBucs"
     }
     ,
     {
         "name": "Cleveland Indians"
         ,"slug": "indians"
-        ,"hashtag": "#indians"
+        ,"hashtag": "#Indians"
+        ,"hashtag_during_game": "#GoTribe"
     }
 ]
