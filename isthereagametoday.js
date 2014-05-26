@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -17,7 +16,6 @@ var app = express();
 app.set('port', 3035);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -56,14 +54,6 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function(req, res){
-    res.render('sfgiants', {
-        title: 'Are the San Francisco Giants Playing Today?'
-        ,team_name: 'sfgiants'
-        ,meta_description: 'Find out if the San Francisco Giants are playing a baseball game today!'
-    });
-});
-
 app.get('/:team', function(req, res){
     var team = req.params.team.toLowerCase();
     if (_.indexOf(_.keys(teams_data), team) > -1){
@@ -82,6 +72,12 @@ app.get('/games-data/:team', function(req, res){
     else{
         res.json({ error: 'not found' });
     }
+});
+
+app.get('/', function(req, res){
+    res.render('listing', {
+        teams: load_teams
+    });
 });
 
 http.createServer(app).listen(app.get('port'), function(){
