@@ -19,6 +19,7 @@ html
         link(rel="icon", href="/images/teams/" + team_name + "/favicon.ico?v=" + favicon_version, type="image/x-icon")
 
         if process.env.NODE_ENV == 'production'
+            meta(name="google-site-verification", content=team_data.auth_code)
             include tracking.jade
             script.
                 send_tracking = true;
