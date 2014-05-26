@@ -70,7 +70,7 @@ h1 {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 20px;
   text-align: center;
 }
 @media (max-width: 720px) {
@@ -79,6 +79,6 @@ h1 {
     left: auto;
     right: auto;
     bottom: auto;
-    margin: 20px 0;
+    margin: 130px 0 20px;
   }
 }
