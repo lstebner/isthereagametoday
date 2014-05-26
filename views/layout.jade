@@ -46,6 +46,10 @@ html
                         script(type='text/javascript').
                             (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/platform.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();
 
+                if process.env.NODE_ENV == "production"
+                    .ad-unit
+                        include ad.html
+
 
         input(type="hidden", name="team_name", value=team_name)
         input(type="hidden", name="games_url", value=(process.env.NODE_ENV == "production" ? "/games-data" : "/games-data/" + team_name))
