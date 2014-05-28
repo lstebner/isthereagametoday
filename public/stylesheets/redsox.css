@@ -66,6 +66,31 @@ h1 {
   position: absolute;
   left: 136px;
 }
+.other-teams {
+  position: relative;
+  top: 130px;
+}
+.other-teams li {
+  font-size: 18px;
+  display: inline-block;
+  margin: 0 12px 0 0;
+}
+.other-teams li a {
+  color: #d8d8d8;
+  font-weight: 300;
+  text-decoration: none;
+}
+.other-teams li a:hover {
+  color: #fafafa;
+}
+.other-teams li a span {
+  margin-left: 12px;
+  color: #fafafa;
+  opacity: .5;
+}
+.other-teams li:last-child span {
+  display: none;
+}
 .ad-unit {
   position: fixed;
   left: 0;

@@ -92,6 +92,43 @@ h1 {
     .google { position:absolute; left:136px; }
 }
 
+.other-teams{
+    position: relative;
+    top: 130px;
+
+    li{
+        font-size: 18px;
+        display: inline-block;
+        margin: 0 12px 0 0;
+
+        a{
+            color: #d8d8d8;
+            font-weight: 300;
+            text-decoration: none;
+
+            &:hover{
+                color: #fafafa;
+            }
+
+            span{
+                margin-left: 12px;
+                color: #fafafa;
+                opacity: .5;
+            }
+        }
+
+        &.selected{
+            // display: block;
+        }
+
+        &:last-child{
+            span{
+                display: none;
+            }
+        }
+    }
+}
+
 .ad-unit{
     position: fixed;
     left: 0;
