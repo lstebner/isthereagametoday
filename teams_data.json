@@ -34,19 +34,19 @@
         ,"slug": "cardinals"
         ,"hashtag": "#Cardinals"
         ,"hashtag_during_game": "#GoCards"
-        ,"tracking_code": ""
+        ,"tracking_code": "UA-8344152-15"
         ,"track_url": "arethecardinalsplayingtoday.com"
-        ,"auth_code": ""
+        ,"auth_code": "TRQktSlJWcwOgY3YqigrXS1B0gA44-2rUcp03Mj82eA"
     }
     ,
     {
         "name": "Los Angeles Dodgers"
         ,"slug": "dodgers"
         ,"hashtag": "#Dodgers"
-        ,"hashtag_during_game": "#Go"
-        ,"tracking_code": ""
+        ,"hashtag_during_game": "#GoDodgers"
+        ,"tracking_code": "UA-8344152-16"
         ,"track_url": "arethedodgersplayingtoday.com"
-        ,"auth_code": ""
+        ,"auth_code": "x3TOPolrCX02FXEMG-t25fmEEeI4hbHptbJr9CxA-MA"
     }
     ,
     {
@@ -54,9 +54,9 @@
         ,"slug": "phillies"
         ,"hashtag": "#Phillies"
         ,"hashtag_during_game": "#GoPhillies"
-        ,"tracking_code": ""
+        ,"tracking_code": "UA-8344152-14"
         ,"track_url": "arethephilliesplayingtoday.com"
-        ,"auth_code": ""
+        ,"auth_code": "JcNwX2hUtbbIjJrmLbG1kMyzdu3tsLaAFMoS-DKSKR8"
     }
     ,
     {
@@ -64,9 +64,9 @@
         ,"slug": "redsox"
         ,"hashtag": "#RedSox"
         ,"hashtag_during_game": "#GoRedSox"
-        ,"tracking_code": ""
+        ,"tracking_code": "UA-8344152-17"
         ,"track_url": "aretheredsoxplayingtoday.com"
-        ,"auth_code": ""
+        ,"auth_code": "k8A5hNs_VLdrA5bkFJDya1Y-HUP7eAh1H3pqam8vebU"
     }
     ,
     {
@@ -74,8 +74,8 @@
         ,"slug": "yankees"
         ,"hashtag": "#Yankees"
         ,"hashtag_during_game": "#GoYankees"
-        ,"tracking_code": ""
+        ,"tracking_code": "UA-8344152-13"
         ,"track_url": "aretheyankeesplayingtoday.com"
-        ,"auth_code": ""
+        ,"auth_code": "NQnknwMwe10w95TuWyyuikOBf6O3WnYfi4SELQoRiYs"
     }
 ]
