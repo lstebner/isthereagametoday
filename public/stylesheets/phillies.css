@@ -1,5 +1,5 @@
 html {
-  background: url("/images/teams/sfgiants/background.jpg") no-repeat center center fixed #f2552c;
+  background: url("/images/teams/phillies/background.jpg") no-repeat center center fixed #ffffff;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -17,18 +17,18 @@ h1 {
   padding: 0 20px 0 20px;
 }
 #game-details {
-  color: #000000;
+  color: #ba0c2f;
   font-size: 20px;
   line-height: 26px;
   font-family: Helvetica Neue;
   font-weight: bold;
   font-weight: normal;
   padding: 0 10px 0 10px;
-  text-shadow: 1px 1px 1px rgba(255, 253, 208, 0.4);
+  text-shadow: 1px 1px 1px rgba(0, 48, 135, 0.4);
 }
 .Three-Dee {
   line-height: 1em;
-  color: #fffdd0;
+  color: #003087;
   font-weight: bold;
   letter-spacing: 0px;
   font-size: 144px;
@@ -36,7 +36,7 @@ h1 {
   display: none;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0px 0px 0 #000000, 1px 1px 0 #000000, 2px 2px 0 #000000, 3px 3px 0 #000000, 4px 4px 0 #000000, 5px 5px 0 #000000, 6px 6px 0 #000000, 7px 7px 0 #000000, 8px 8px 0 #000000, 9px 9px 0 #000000, 10px 10px 0 #000000, 11px 11px 0 #000000, 12px 12px 0 #000000, 13px 13px 0 #000000, 14px 14px 0 #000000, 15px 15px 0 #000000, 16px 16px 0 #000000, 17px 17px 0 #000000, 18px 18px 0 #000000, 19px 19px 0 #000000, 20px 20px 0 #000000, 21px 21px 0 #000000;
+  text-shadow: 0px 0px 0 #ba0c2f, 1px 1px 0 #ba0c2f, 2px 2px 0 #ba0c2f, 3px 3px 0 #ba0c2f, 4px 4px 0 #ba0c2f, 5px 5px 0 #ba0c2f, 6px 6px 0 #ba0c2f, 7px 7px 0 #ba0c2f, 8px 8px 0 #ba0c2f, 9px 9px 0 #ba0c2f, 10px 10px 0 #ba0c2f, 11px 11px 0 #ba0c2f, 12px 12px 0 #ba0c2f, 13px 13px 0 #ba0c2f, 14px 14px 0 #ba0c2f, 15px 15px 0 #ba0c2f, 16px 16px 0 #ba0c2f, 17px 17px 0 #ba0c2f, 18px 18px 0 #ba0c2f, 19px 19px 0 #ba0c2f, 20px 20px 0 #ba0c2f, 21px 21px 0 #ba0c2f;
 }
 .loading-text {
   text-transform: none;

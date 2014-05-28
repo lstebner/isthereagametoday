@@ -28,4 +28,54 @@
         ,"track_url": "aretheindiansplayingtoday.com"
         ,"auth_code": "gTdMwvMyIlhFeBwP4pz2pFVvpghcxabtiwoA3U7vccs"
     }
+    ,
+    {
+        "name": "St Louis Cardinals"
+        ,"slug": "cardinals"
+        ,"hashtag": "#Cardinals"
+        ,"hashtag_during_game": "#GoCards"
+        ,"tracking_code": ""
+        ,"track_url": "arethecardinalsplayingtoday.com"
+        ,"auth_code": ""
+    }
+    ,
+    {
+        "name": "Los Angeles Dodgers"
+        ,"slug": "dodgers"
+        ,"hashtag": "#Dodgers"
+        ,"hashtag_during_game": "#Go"
+        ,"tracking_code": ""
+        ,"track_url": "arethedodgersplayingtoday.com"
+        ,"auth_code": ""
+    }
+    ,
+    {
+        "name": "Philadelphia Phillies"
+        ,"slug": "phillies"
+        ,"hashtag": "#Phillies"
+        ,"hashtag_during_game": "#GoPhillies"
+        ,"tracking_code": ""
+        ,"track_url": "arethephilliesplayingtoday.com"
+        ,"auth_code": ""
+    }
+    ,
+    {
+        "name": "Boston Red Sox"
+        ,"slug": "redsox"
+        ,"hashtag": "#RedSox"
+        ,"hashtag_during_game": "#GoRedSox"
+        ,"tracking_code": ""
+        ,"track_url": "aretheredsoxplayingtoday.com"
+        ,"auth_code": ""
+    }
+    ,
+    {
+        "name": "New York Yankees"
+        ,"slug": "yankees"
+        ,"hashtag": "#Yankees"
+        ,"hashtag_during_game": "#GoYankees"
+        ,"tracking_code": ""
+        ,"track_url": "aretheyankeesplayingtoday.com"
+        ,"auth_code": ""
+    }
 ]

@@ -1,5 +1,5 @@
 html {
-  background: url("/images/teams/sjsharks/background.jpg") no-repeat center center fixed #05535d;
+  background: url("/images/teams/sjsharks/background.jpg") no-repeat center center fixed #f38f20;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -17,18 +17,18 @@ h1 {
   padding: 0 20px 0 20px;
 }
 #game-details {
-  color: #f38f20;
+  color: #05535d;
   font-size: 20px;
   line-height: 26px;
   font-family: Helvetica Neue;
   font-weight: bold;
   font-weight: normal;
   padding: 0 10px 0 10px;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 .Three-Dee {
   line-height: 1em;
-  color: #fdfcff;
+  color: #000000;
   font-weight: bold;
   letter-spacing: 0px;
   font-size: 144px;
@@ -36,7 +36,7 @@ h1 {
   display: none;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0px 0px 0 #f38f20, 1px 1px 0 #f38f20, 2px 2px 0 #f38f20, 3px 3px 0 #f38f20, 4px 4px 0 #f38f20, 5px 5px 0 #f38f20, 6px 6px 0 #f38f20, 7px 7px 0 #f38f20, 8px 8px 0 #f38f20, 9px 9px 0 #f38f20, 10px 10px 0 #f38f20, 11px 11px 0 #f38f20, 12px 12px 0 #f38f20, 13px 13px 0 #f38f20, 14px 14px 0 #f38f20, 15px 15px 0 #f38f20, 16px 16px 0 #f38f20, 17px 17px 0 #f38f20, 18px 18px 0 #f38f20, 19px 19px 0 #f38f20, 20px 20px 0 #f38f20, 21px 21px 0 #f38f20;
+  text-shadow: 0px 0px 0 #05535d, 1px 1px 0 #05535d, 2px 2px 0 #05535d, 3px 3px 0 #05535d, 4px 4px 0 #05535d, 5px 5px 0 #05535d, 6px 6px 0 #05535d, 7px 7px 0 #05535d, 8px 8px 0 #05535d, 9px 9px 0 #05535d, 10px 10px 0 #05535d, 11px 11px 0 #05535d, 12px 12px 0 #05535d, 13px 13px 0 #05535d, 14px 14px 0 #05535d, 15px 15px 0 #05535d, 16px 16px 0 #05535d, 17px 17px 0 #05535d, 18px 18px 0 #05535d, 19px 19px 0 #05535d, 20px 20px 0 #05535d, 21px 21px 0 #05535d;
 }
 .loading-text {
   text-transform: none;

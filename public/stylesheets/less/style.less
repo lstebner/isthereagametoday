@@ -1,5 +1,5 @@
-@bg_color: @primary_color;
-@details_color: @secondary_color;
+@bg_color: @secondary_color;
+@details_color: @primary_color;
 @bg_image: "/images/teams/@{team}/background.jpg";
 
 html { 
@@ -31,12 +31,12 @@ h1 {
     font-weight:bold; 
     font-weight:normal;
     padding:0 10px 0 10px;
-    text-shadow: 1px 1px 1px fade(@third_color, 50%);
+    text-shadow: 1px 1px 1px fade(@third_color, 40%);
 }
 
 .Three-Dee{
     line-height: 1em;
-    color: #fdfcff;
+    color: @third_color; //#fdfcff;
     font-weight:bold;
     letter-spacing:0px;
     font-size: 144px;
