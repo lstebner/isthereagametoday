@@ -2,12 +2,14 @@
 // @codekit-prepend "../bower_components/underscore/underscore.js";
 
 var team_name = ""
+    ,team_data = {}
     ,games_feed = '/games-data'
 ;
 
 $(function(){
     team_name = $('input[name=team_name]').val();
     games_feed = $('input[name=games_url]').val();
+    team_data = JSON.parse($('input[name=team_data]').val());
     tbn(document, 'script', 'twitter-wjs');
 
     if (send_tracking){
