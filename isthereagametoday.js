@@ -217,6 +217,9 @@ app.get('/:team', function(req, res){
             ,favicon_version: FAVICON_VERSION
         });
     }
+    else{
+        res.send('404', 'not found');
+    }
 });
 
 app.get('/games-data/:team', function(req, res){
