@@ -180,6 +180,14 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/sitemap', function(req, res){
+    res.render('sitemap', {
+        layout: false
+        ,today: moment().format('YYYY-MM-DD')
+        ,base_url: 'http://' + req.headers.host
+    });
+});
+
 app.get('/:team', function(req, res){
     var team = req.params.team.toLowerCase();
     var team_data = {};
