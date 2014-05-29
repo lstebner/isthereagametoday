@@ -180,12 +180,21 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/sitemap', function(req, res){
-    res.render('sitemap', {
-        layout: false
-        ,today: moment().format('YYYY-MM-DD')
-        ,base_url: 'http://' + req.headers.host
-    });
+app.get('/:team/sitemap', function(req, res){
+    var team = req.params.team.toLowerCase();
+
+    if (_.indexOf(_.keys(teams_data), team) > -1){
+        team_data = teams_data[team];
+
+        res.render('sitemap', {
+            layout: false
+            ,today: moment().format('YYYY-MM-DD')
+            ,base_url: 'http://www.' + team_data.track_url
+        });
+    }
+    else{
+        res.send('404', 'sorry!');
+    }
 });
 
 app.get('/:team', function(req, res){
