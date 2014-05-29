@@ -103,15 +103,14 @@ function isThereAGameToday(team_data){
 
     for (var i in data){
         start_date = moment(new Date(data[i].start_date + ' ' + data[i].start_time));
+        end_date = moment(new Date(data[i].end_date + ' ' + data[i].end_time));
 
-        if (start_date.get('date') == now.get('date') && start_date.get('month') == now.get('month')){
-            end_date = moment(new Date(data[i].end_date + ' ' + data[i].end_time));
-
+        if (now.format('MMDD') == start_date.format('MMDD')){
             is_there = 'Yes';
             tweet_text += 'Yes!';
 
-            if (end_date.get('hours') > now.get('hours') || (end_date.get('hours') == now.get('hours') && end_date.get('minutes') > now.get('minutes'))){
-                if (start_date.get('hours') <= now.get('hours') && start_date.get('minutes') <= now.get('minutes')){
+            if (now.unix() < end_date.unix()){
+                if (now.unix() > start_date.unix()){
                     details = 'they\'re playing right now at ' + data[i].location + ' against the ' + data[i].against + '!';
                     tweet_text += ' Right now against the ' + data[i].against + '! ' + team_data.hashtag_during_game;
                 }
@@ -144,7 +143,7 @@ function isThereAGameToday(team_data){
 
             break;
         }
-        else if (is_there.toLowerCase() == "no" && start_date.get('date') > now.get('date') && start_date.get('month') >= now.get('month')){
+        else if (is_there.toLowerCase() == "no" && end_date.unix() > now.unix()){ 
             next_game_start_date = moment(new Date(data[i].start_date));
 
             if (next_game_start_date.isValid()){
@@ -156,14 +155,11 @@ function isThereAGameToday(team_data){
                 }
 
                 details = 'Not today, looks like the next scheduled game is ' + day + ' at ' + data[i].location + '.';
+                tweet_text += ' ' + details;
             }
 
             break;
         }
-    }
-
-    if (is_there == 'NO'){
-        tweet_text += ' No.';
     }
 
     return {
