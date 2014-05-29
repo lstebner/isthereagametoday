@@ -115,10 +115,8 @@ function isThereAGameToday(team_data){
                     tweet_text += ' Right now against the ' + data[i].against + '! ' + team_data.hashtag_during_game;
                 }
                 else{
-                    start_hours = (start_date.get('hours') > 12 ? start_date.get('hours') - 12 : start_date.get('hours'));
-                    start_minutes = (start_date.get('minutes') < 10 ? "0" + start_date.get('minutes') : start_date.get('minutes'));
-                    start_time = start_hours + ':' + start_minutes + ' PST';
-                    details = 'at ' + data[i].location + ' against The ' + data[i].against + ' @ ' + start_time;
+                    start_time = start_date.format('h:mma')
+                    details = 'at ' + data[i].location + ' against The ' + data[i].against + ' @ ' + start_time
                     tweet_text += ' Starting at ' + start_time + ' against the ' + data[i].against;
                 }
             }
@@ -136,7 +134,7 @@ function isThereAGameToday(team_data){
                             day = next_game_start_date.format('dddd');
                         }
 
-                        details += ' The next game is scheduled for ' + day + ' at ' + data[parseInt(i)+1].location + '.';
+                        details += ' The next game is scheduled for ' + day + ' at ' + data[parseInt(i)+1].location + ' @ ' + next_game_start_date.format('h:mma');
                     }
                 }
             }
@@ -144,7 +142,7 @@ function isThereAGameToday(team_data){
             break;
         }
         else if (is_there.toLowerCase() == "no" && end_date.unix() > now.unix()){ 
-            next_game_start_date = moment(new Date(data[i].start_date));
+            next_game_start_date = moment(new Date(data[i].start_date + " " + data[i].start_time));
 
             if (next_game_start_date.isValid()){
                 if (next_game_start_date.get('day') == now.get('day') + 1){
@@ -154,8 +152,8 @@ function isThereAGameToday(team_data){
                     day = next_game_start_date.format('dddd');
                 }
 
-                details = 'Not today, looks like the next scheduled game is ' + day + ' at ' + data[i].location + '.';
-                tweet_text += ' ' + details;
+                details = 'Not today, looks like the next scheduled game is ' + day + ' at ' + data[i].location + ' @ ' + next_game_start_date.format('h:mma');
+                tweet_text += 'Not today, the next scheduled game is ' + day + ' at ' + data[i].location + ' @ ' + next_game_start_date.format('h:mma');
             }
 
             break;
