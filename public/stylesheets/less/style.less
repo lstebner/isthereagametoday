@@ -2,6 +2,12 @@
 @details_color: @primary_color;
 @bg_image: "/images/teams/@{team}/background.jpg";
 
+.transition(@t){
+    transition: @t;
+    -webkit-transition: @t;
+    -moz-transition: @t;
+}
+
 html { 
     background: url(@bg_image) no-repeat center center fixed @bg_color; 
     -webkit-background-size: cover;
@@ -102,9 +108,10 @@ h1 {
         margin: 0 12px 0 0;
 
         a{
-            color: #d8d8d8;
+            color: #333;
             font-weight: 300;
             text-decoration: none;
+            .transition(color .4s);
 
             &:hover{
                 color: #fafafa;
@@ -137,17 +144,7 @@ h1 {
     text-align: center;
 }
 
-@media (max-width: 720px){
-    .ad-unit{
-        position: relative;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        margin: 130px 0 20px;
-    }
-}
-
-
+@import 'media.less';
 
 
 
