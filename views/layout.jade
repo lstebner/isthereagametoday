@@ -61,4 +61,5 @@ html
         input(type="hidden", name="team_name", value=team_name)
         input(type="hidden", name="games_url", value=(process.env.NODE_ENV == "production" ? "/games-data" : "/games-data/" + team_name))
         input(type="hidden", name="team_data", value=JSON.stringify(team_data))
+        input(type="hidden", name="today_data", value=JSON.stringify(today_data))
 
