@@ -29,10 +29,9 @@ html
 
     body
         block content
-            .Three-Dee(style='display: block;')
-                span.loading-text Checking...
+            .Three-Dee(style='display: block;')= today_data.is_there
 
-            #game-details
+            #game-details= today_data.details
 
             #footer
                 #social-media
@@ -43,7 +42,7 @@ html
                         script.
                             tbn = function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}};//(document, 'script', 'twitter-wjs');
                     .google
-                        .g-plus(data-action='share', data-annotation='vertical-bubble', data-height='60', data-href=base_url)
+                        .g-plus(data-action='share', data-annotation='vertical-bubble', data-height='60', data-href=base_url, data-text=today_data.tweet_text)
                         script(type='text/javascript').
                             (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/platform.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();
 
@@ -61,4 +60,4 @@ html
 
         input(type="hidden", name="team_name", value=team_name)
         input(type="hidden", name="games_url", value=(process.env.NODE_ENV == "production" ? "/games-data" : "/games-data/" + team_name))
-        input(type="hidden", name="team_data", value=JSON.stringify(team_data))
+
