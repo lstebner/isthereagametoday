@@ -39,6 +39,8 @@ html
                         iframe(src='//www.facebook.com/plugins/like.php?href=' + base_url + '&width=55&layout=box_count&action=like&show_faces=false&share=false&height=65', scrolling='no', frameborder='0', style='border: none; overflow: hidden; width: 55px; height: 65px;', allowtransparency='true')
                     .twitter
                         a.twitter-share-button(href='https://twitter.com/share', data-url=base_url, data-text=today_data.tweet_text, data-related='zoinc', data-count='vertical')
+                            script.
+                                tbn = function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}
                     .google
                         .g-plus(data-action='share', data-annotation='vertical-bubble', data-height='60', data-href=base_url)
                         script(type='text/javascript').
