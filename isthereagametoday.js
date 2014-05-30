@@ -206,7 +206,8 @@ app.get('/:team', function(req, res){
             title: 'Are the ' + team_data.name + ' Playing Today?'
             ,base_url: 'http://' + req.headers.host
             ,team_name: team //poorly named, this is really the slug used for javascript stuff
-            ,team_data: _.omit(team_data, 'schedule', 'formatted_schedule')
+            ,team_data: team_data
+            ,team_data_clean: _.omit(team_data, 'schedule', 'formatted_schedule')
             ,teams_data: teams_data
             ,today_data: today_data
             ,meta_description: 'Find out if the ' + team_data.name + ' are playing a baseball game today!'
