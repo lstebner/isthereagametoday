@@ -165,6 +165,8 @@ function isThereAGameToday(team_data){
         ,tweet_text: tweet_text
         ,details: details
         ,start_date: start_date ? start_date.valueOf() : null
+        ,month: start_date.format('MMMM')
+        ,day: start_date.format('dddd')
         ,next_game_start_date: next_game_start_date ? next_game_start_date.valueOf() : null
     };
 };
@@ -208,6 +210,51 @@ app.get('/:team', function(req, res){
             ,teams_data: teams_data
             ,today_data: today_data
             ,meta_description: 'Find out if the ' + team_data.name + ' are playing a baseball game today!'
+            ,favicon_version: FAVICON_VERSION
+        });
+    }
+    else{
+        res.send('404', 'not found');
+    }
+});
+
+app.get('/:team/schedule', function(req, res){
+    var team = req.params.team.toLowerCase();
+    var team_data = {};
+    var months = [];
+    var games_by_month = {};
+
+    if (_.indexOf(_.keys(teams_data), team) > -1){
+        team_data = teams_data[team];
+        today_data = isThereAGameToday(team_data);
+
+        _.each(team_data.formatted_schedule, function(gameday){
+            var start_date = moment(new Date(gameday.start_date + " " + gameday.start_time));
+            var month_name = start_date.format('MMMM');
+
+            if (_.indexOf(months, month_name) < 0){
+                months.push(month_name);
+                games_by_month[month_name] = [];
+            }
+
+            games_by_month[month_name].push({
+                datetime: start_date.valueOf()
+                ,date_formatted: start_date.format('dddd M/DD/YYYY')
+                ,details: gameday.against + ' at ' + gameday.location + ' @ ' + start_date.format('H:mma')
+            });
+        });
+
+        res.render('schedule', {
+            title: team_data.name + " " + data_year + " Schedule"
+            ,base_url: 'http://www.' + team_data.track_url
+            ,team_name: team //poorly named, this is really the slug used for javascript stuff
+            ,team_data: team_data
+            ,team_data_clean: _.omit(team_data, 'schedule', 'formatted_schedule')
+            ,teams_data: teams_data
+            ,today_data: today_data
+            ,months: months
+            ,games_by_month: games_by_month
+            ,meta_description: 'View the ' + data_year + ' Schedule for the ' + team_data.name
             ,favicon_version: FAVICON_VERSION
         });
     }

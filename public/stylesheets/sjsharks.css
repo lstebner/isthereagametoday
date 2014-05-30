@@ -101,6 +101,56 @@ h1 {
   bottom: 20px;
   text-align: center;
 }
+#schedule .months {
+  list-style-type: none;
+  padding: 0;
+}
+#schedule .months li {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: 300;
+}
+#schedule .months li a {
+  margin: 20px 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.4s;
+  -webkit-transition: color 0.4s;
+  -moz-transition: color 0.4s;
+}
+#schedule .months li a.active,
+#schedule .months li a:hover {
+  color: #fafafa;
+}
+#schedule .months li a:focus {
+  outline: none;
+}
+#schedule .games {
+  text-align: center;
+  overflow: hidden;
+}
+#schedule .games .month-container {
+  display: none;
+}
+#schedule .games .month-container.active {
+  display: block;
+}
+#schedule .games .month-container ul {
+  list-style-type: none;
+  background-color: rgba(243, 143, 32, 0.4);
+  padding: 20px 0;
+  display: block;
+}
+#schedule .games .month-container ul li {
+  font-weight: 300;
+  margin: 20px 0;
+  font-size: 22px;
+}
+#schedule .games .month-container ul li p {
+  margin: 4px 0;
+  display: inline-block;
+  padding: 0 18px;
+}
 @media (max-width: 720px) {
   .ad-unit {
     position: relative;

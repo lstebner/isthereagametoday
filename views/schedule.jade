@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    #schedule
+        ul.months
+            for month in months
+                - classes = []
+                if month == today_data.month
+                    - classes.push('active')
+
+                li
+                    a(href="#", class=classes.join(' '), data-month=month).month_link= month
+
+        .games
+            for games, month in games_by_month
+                - classes = []
+                if month == today_data.month
+                    - classes.push('active')
+
+                .month-container(data-month=month, class=classes.join(' '))
+                    ul.games-list
+                        for game in games
+                            li
+                                p.date= game.date_formatted
+                                p.details= game.details
