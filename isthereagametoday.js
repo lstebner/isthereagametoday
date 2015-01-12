@@ -86,7 +86,7 @@ var load_games_data = function(team, store){
 function isThereAGameToday(team_data){
     var now = moment()
         ,hours_in_1_day = 3600*60*24
-        ,tomorrow = moment().add('days', 1)
+        ,tomorrow = moment().add(1, 'days')
         ,start_date = null  
         ,start_time = null
         ,end_date = null
@@ -192,7 +192,6 @@ app.get('/:team/sitemap', function(req, res){
         res.send('404', 'sorry!');
     }
 });
-
 app.get('/:team', function(req, res){
     var team = req.params.team.toLowerCase();
     var team_data = {};
