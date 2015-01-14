@@ -26,7 +26,7 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-var data_year = "2014";
+var data_year = "2015";
 var teams_data = {};
 
 fs.readFile(__dirname + '/teams_data.json', function(err, contents){
