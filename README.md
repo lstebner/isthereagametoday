@@ -15,7 +15,7 @@ You can use it to run one as well if you want, I will update this in the near fu
 1. Google for "[team name] downloadable schedule" and you should find an official site with a downloadable CSV file. 
     - Save this file to the "schedules" folder with the name "[year]_[team].csv"
     - Open this file because you need to make some replacements
-        1. Change the "SCHEDULE" column title to "AGAINST"
+        1. Change the "SUBJECT" column title to "AGAINST"
         2. Search for all instances of " at [team]" and "[team] at " and replace it with an empty string. For example, the Pirates, you would replace "Pirates at " and " at Pirates", making sure to include the spaces.
 
 2. Copy one of the existing LESS files from /stylesheets/teams to your new team name.
