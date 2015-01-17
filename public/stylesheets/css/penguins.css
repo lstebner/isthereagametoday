@@ -103,7 +103,6 @@ h1 {
   display: none;
 }
 .ad-unit {
-  position: fixed;
   left: 0;
   right: 0;
   bottom: 20px;
