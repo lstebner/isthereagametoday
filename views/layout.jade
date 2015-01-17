@@ -11,7 +11,7 @@ html
         meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
         title= title
 
-        link(rel='stylesheet', href='/stylesheets/' + team_name + '.css')
+        link(rel='stylesheet', href='/stylesheets/css/' + team_name + '.css')
         script(type="text/javascript", src="/javascripts/min/main.min.js")
         script(type="text/javascript", src="/javascripts/coffee/main.js")
 
@@ -29,9 +29,10 @@ html
 
     body
         block content
+            .game-details Are the #{team_data.name} playing a game today?
             .Three-Dee(style='display: block;')= today_data.is_there
 
-            #game-details= today_data.details
+            .game-details= today_data.details
 
             #footer
                 #social-media
@@ -46,12 +47,28 @@ html
                         script(type='text/javascript').
                             (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/platform.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();
 
-                ul.other-teams
-                    for team in teams_data
-                        if team.slug != team_name
+                if today_data.upcoming_games.length
+                    .upcoming-games
+                        .game-details Upcoming games for the #{team_data.name}
+                        .games-list
+                            for game in today_data.upcoming_games
+                                li
+                                    p.date= game.date_formatted
+                                    p.details= game.details
+
                             li
-                                a(href="http://www." + team.track_url)= team.name
-                                    span &bull;
+                                a(href="/schedule").btn View the full schedule
+
+
+                .other-teams
+                    p Check if some other teams are playing around the league
+
+                    ul
+                        for team in teams_data
+                            if team.slug != team_name
+                                li
+                                    a(href="http://www." + team.track_url)= team.name
+                                        span &bull;
 
                 if process.env.NODE_ENV == "production"
                     .ad-unit

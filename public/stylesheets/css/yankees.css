@@ -12,19 +12,25 @@ body {
   margin: 0;
   padding: 0;
 }
+p {
+  font-weight: 200;
+}
 h1 {
   display: block;
   padding: 0 20px 0 20px;
 }
-#game-details {
+.game-details {
   color: #1c2841;
   font-size: 20px;
   line-height: 26px;
   font-family: Helvetica Neue;
   font-weight: bold;
   font-weight: normal;
-  padding: 0 10px 0 10px;
+  padding: 10px;
   text-shadow: 1px 1px 1px rgba(128, 128, 128, 0.4);
+}
+.game-details:first-child {
+  margin-top: 20px;
 }
 .Three-Dee {
   line-height: 1em;
@@ -32,7 +38,7 @@ h1 {
   font-weight: bold;
   letter-spacing: 0px;
   font-size: 144px;
-  margin: 60px 0 40px 0;
+  margin: 10px 0 40px 0;
   display: none;
   text-align: center;
   text-transform: uppercase;
@@ -52,23 +58,24 @@ h1 {
 }
 #social-media {
   position: relative;
-  width: 190px;
-  margin: 0 auto;
+  text-align: center;
+}
+#social-media > div {
+  position: relative;
+  display: inline-block;
+  margin-right: 16px;
 }
 #social-media .facebook {
-  position: absolute;
+  top: 5px;
+  left: 4px;
 }
 #social-media .twitter {
-  position: absolute;
-  left: 65px;
-}
-#social-media .google {
-  position: absolute;
-  left: 136px;
+  top: 1px;
+  margin-right: 20px;
 }
 .other-teams {
   position: relative;
-  top: 130px;
+  margin: 60px;
 }
 .other-teams li {
   font-size: 18px;
@@ -100,6 +107,23 @@ h1 {
   right: 0;
   bottom: 20px;
   text-align: center;
+}
+.upcoming-games .btn {
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 8px 50px;
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.6s;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  font-size: 18px;
+}
+.upcoming-games .btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #000;
 }
 #schedule .months {
   list-style-type: none;
@@ -135,18 +159,18 @@ h1 {
 #schedule .games .month-container.active {
   display: block;
 }
-#schedule .games .month-container ul {
+.games-list {
   list-style-type: none;
   background-color: rgba(255, 255, 255, 0.4);
   padding: 20px 0;
   display: block;
 }
-#schedule .games .month-container ul li {
+.games-list li {
   font-weight: 300;
   margin: 20px 0;
   font-size: 22px;
 }
-#schedule .games .month-container ul li p {
+.games-list li p {
   margin: 4px 0;
   display: inline-block;
   padding: 0 18px;

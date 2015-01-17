@@ -87,7 +87,6 @@ function isThereAGameToday(team_data){
     var now = moment()
         ,hours_in_1_day = 3600*60*24
         ,tomorrow = moment().add(1, 'days')
-        ,start_date = null  
         ,start_time = null
         ,end_date = null
         ,start_hours = 0
@@ -99,66 +98,94 @@ function isThereAGameToday(team_data){
         ,data = team_data.formatted_schedule
         ,next_game_start_date = null
         ,day = ''
+        ,start_date = moment(new Date(data[0].start_date + ' ' + data[0].start_time))
+        ,upcoming_games = []
+        ,current_game_idx = 0
     ;
 
-    for (var i in data){
-        start_date = moment(new Date(data[i].start_date + ' ' + data[i].start_time));
-        end_date = moment(new Date(data[i].end_date + ' ' + data[i].end_time));
+    if (now.unix() < start_date.unix()){
+        is_there = 'No';
+        if (start_date.get('day') == now.get('day') + 1){
+            day = 'tomorrow';
+        }
+        else{
+            day = start_date.format('dddd');
+        }
 
-        if (now.format('MMDD') == start_date.format('MMDD')){
-            is_there = 'Yes';
-            tweet_text += 'Yes!';
+        details = "Pre-season is coming, it starts on " + day + " at " + data[0].location + " @ " + start_date.format("h:mma");
+        tweet_text += details;
+    }
+    else{
+        for (var i in data){
+            start_date = moment(new Date(data[i].start_date + ' ' + data[i].start_time));
+            end_date = moment(new Date(data[i].end_date + ' ' + data[i].end_time));
 
-            if (now.unix() < end_date.unix()){
-                if (now.unix() > start_date.unix()){
-                    details = 'they\'re playing right now at ' + data[i].location + ' against the ' + data[i].against + '!';
-                    tweet_text += ' Right now against the ' + data[i].against + '! ' + team_data.hashtag_during_game;
-                }
-                else{
-                    start_time = start_date.format('h:mma')
-                    details = 'at ' + data[i].location + ' against The ' + data[i].against + ' @ ' + start_time
-                    tweet_text += ' Starting at ' + start_time + ' against the ' + data[i].against;
-                }
-            }
-            else{
-                details = 'but it\'s already over.';
+            if (now.format('MMDD') == start_date.format('MMDD')){
+                is_there = 'Yes';
+                tweet_text += 'Yes!';
 
-                if (data.length > i){
-                    next_game_start_date = moment(new Date(data[parseInt(i)+1].start_date));
-
-                    if (next_game_start_date != "Invalid Date"){
-                        if (next_game_start_date.get('day') == now.get('day') + 1){
-                            day = 'tomorrow';
-                        }
-                        else{
-                            day = next_game_start_date.format('dddd');
-                        }
-
-                        details += ' The next game is scheduled for ' + day + ' at ' + data[parseInt(i)+1].location + ' @ ' + next_game_start_date.format('h:mma');
+                if (now.unix() < end_date.unix()){
+                    if (now.unix() > start_date.unix()){
+                        details = 'they\'re playing right now at ' + data[i].location + ' against the ' + data[i].against + '!';
+                        tweet_text += ' Right now against the ' + data[i].against + '! ' + team_data.hashtag_during_game;
+                    }
+                    else{
+                        start_time = start_date.format('h:mma')
+                        details = 'at ' + data[i].location + ' against The ' + data[i].against + ' @ ' + start_time
+                        tweet_text += ' Starting at ' + start_time + ' against the ' + data[i].against;
                     }
                 }
-            }
-
-            break;
-        }
-        else if (is_there.toLowerCase() == "no" && end_date.unix() > now.unix()){ 
-            next_game_start_date = moment(new Date(data[i].start_date + " " + data[i].start_time));
-
-            if (next_game_start_date.isValid()){
-                if (next_game_start_date.get('day') == now.get('day') + 1){
-                    day = 'tomorrow';
-                }
                 else{
-                    day = next_game_start_date.format('dddd');
+                    details = 'but it\'s already over.';
+
+                    if (data.length > i){
+                        next_game_start_date = moment(new Date(data[parseInt(i)+1].start_date));
+
+                        if (next_game_start_date != "Invalid Date"){
+                            if (next_game_start_date.get('day') == now.get('day') + 1){
+                                day = 'tomorrow';
+                            }
+                            else{
+                                day = next_game_start_date.format('dddd');
+                            }
+
+                            details += ' The next game is scheduled for ' + day + ' at ' + data[parseInt(i)+1].location + ' @ ' + next_game_start_date.format('h:mma');
+                        }
+                    }
                 }
 
-                details = 'Not today, looks like the next scheduled game is ' + day + ' at ' + data[i].location + ' @ ' + next_game_start_date.format('h:mma');
-                tweet_text += 'Not today, the next scheduled game is ' + day + ' at ' + data[i].location + ' @ ' + next_game_start_date.format('h:mma');
+                current_game_idx = i;
+                break;
             }
+            else if (is_there.toLowerCase() == "no" && end_date.unix() > now.unix()){ 
+                next_game_start_date = moment(new Date(data[i].start_date + " " + data[i].start_time));
 
-            break;
+                if (next_game_start_date.isValid()){
+                    if (next_game_start_date.get('day') == now.get('day') + 1){
+                        day = 'tomorrow';
+                    }
+                    else{
+                        day = next_game_start_date.format('dddd');
+                    }
+
+                    details = 'Not today, looks like the next scheduled game is ' + day + ' at ' + data[i].location + ' @ ' + next_game_start_date.format('h:mma');
+                    tweet_text += 'Not today, the next scheduled game is ' + day + ' at ' + data[i].location + ' @ ' + next_game_start_date.format('h:mma');
+                }
+
+                current_game_idx = i;
+                break;
+            }
         }
     }
+
+    upcoming_games = data.slice(current_game_idx, 3);
+    _.each(upcoming_games, function(gameday, idx){
+        var start_date = moment(new Date(gameday.start_date + " " + gameday.start_time));
+
+        upcoming_games[idx].datetime = start_date.valueOf();
+        upcoming_games[idx].date_formatted = start_date.format('dddd M/DD/YYYY');
+        upcoming_games[idx].details = gameday.against + ' at ' + gameday.location + ' @ ' + start_date.format('H:mma')
+    });
 
     return {
         is_there: is_there
@@ -168,6 +195,7 @@ function isThereAGameToday(team_data){
         ,month: start_date.format('MMMM')
         ,day: start_date.format('dddd')
         ,next_game_start_date: next_game_start_date ? next_game_start_date.valueOf() : null
+        ,upcoming_games: upcoming_games
     };
 };
 

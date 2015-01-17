@@ -24,20 +24,28 @@ body {
     padding:0;
 }
 
+p{
+    font-weight: 200;
+}
+
 h1 {
     display:block;
     padding:0 20px 0 20px;
 }
 
-#game-details {
+.game-details {
     color: @details_color;
     font-size:20px; 
     line-height:26px; 
     font-family: Helvetica Neue;
     font-weight:bold; 
     font-weight:normal;
-    padding:0 10px 0 10px;
+    padding: 10px;
     text-shadow: 1px 1px 1px fade(@third_color, 40%);
+
+    &:first-child{
+        margin-top: 20px;
+    }
 }
 
 .Three-Dee{
@@ -46,7 +54,7 @@ h1 {
     font-weight:bold;
     letter-spacing:0px;
     font-size: 144px;
-    margin:60px 0 40px 0;
+    margin:10px 0 40px 0;
     display:none;
     text-align:center;
     text-transform:uppercase;
@@ -90,17 +98,32 @@ h1 {
 
 #social-media {
     position:relative; 
-    width:190px; 
-    margin: 0 auto;
+    text-align: center;
 
-    .facebook { position:absolute; }
-    .twitter { position:absolute; left:65px; }
-    .google { position:absolute; left:136px; }
+    >div{
+        position: relative;
+        display: inline-block;
+        margin-right: 16px;
+    }
+
+    .facebook { 
+        top: 5px;
+        left: 4px;
+    }
+
+    .twitter {
+        top: 1px;
+        margin-right: 20px;
+    }
+
+    .google { 
+
+    }
 }
 
 .other-teams{
     position: relative;
-    top: 130px;
+    margin: 60px;
 
     li{
         font-size: 18px;
@@ -142,6 +165,25 @@ h1 {
     right: 0;
     bottom: 20px;
     text-align: center;
+}
+
+.upcoming-games{
+    .btn{
+        border: 1px solid #000;
+        border-radius: 3px;
+        padding: 8px 50px;
+        display: inline-block;
+        color: #333;
+        text-decoration: none;
+        background-color: rgba(255, 255, 255, .1);
+        .transition(all .6s);
+        font-size: 18px;
+
+        &:hover{
+            background-color: rgba(255, 255, 255, .3);
+            color: #000;
+        }
+    }
 }
 
 @import 'schedule.less';

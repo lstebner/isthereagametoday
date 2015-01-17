@@ -1,5 +1,5 @@
 html {
-  background: url("/images/teams/redsox/background.jpg") no-repeat center center fixed #002244;
+  background: url("/images/teams/cardinals/background.jpg") no-repeat center center fixed #0a2252;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -12,19 +12,25 @@ body {
   margin: 0;
   padding: 0;
 }
+p {
+  font-weight: 200;
+}
 h1 {
   display: block;
   padding: 0 20px 0 20px;
 }
-#game-details {
-  color: #c60c30;
+.game-details {
+  color: #c41e3a;
   font-size: 20px;
   line-height: 26px;
   font-family: Helvetica Neue;
   font-weight: bold;
   font-weight: normal;
-  padding: 0 10px 0 10px;
+  padding: 10px;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
+}
+.game-details:first-child {
+  margin-top: 20px;
 }
 .Three-Dee {
   line-height: 1em;
@@ -32,11 +38,11 @@ h1 {
   font-weight: bold;
   letter-spacing: 0px;
   font-size: 144px;
-  margin: 60px 0 40px 0;
+  margin: 10px 0 40px 0;
   display: none;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0px 0px 0 #c60c30, 1px 1px 0 #c60c30, 2px 2px 0 #c60c30, 3px 3px 0 #c60c30, 4px 4px 0 #c60c30, 5px 5px 0 #c60c30, 6px 6px 0 #c60c30, 7px 7px 0 #c60c30, 8px 8px 0 #c60c30, 9px 9px 0 #c60c30, 10px 10px 0 #c60c30, 11px 11px 0 #c60c30, 12px 12px 0 #c60c30, 13px 13px 0 #c60c30, 14px 14px 0 #c60c30, 15px 15px 0 #c60c30, 16px 16px 0 #c60c30, 17px 17px 0 #c60c30, 18px 18px 0 #c60c30, 19px 19px 0 #c60c30, 20px 20px 0 #c60c30, 21px 21px 0 #c60c30;
+  text-shadow: 0px 0px 0 #c41e3a, 1px 1px 0 #c41e3a, 2px 2px 0 #c41e3a, 3px 3px 0 #c41e3a, 4px 4px 0 #c41e3a, 5px 5px 0 #c41e3a, 6px 6px 0 #c41e3a, 7px 7px 0 #c41e3a, 8px 8px 0 #c41e3a, 9px 9px 0 #c41e3a, 10px 10px 0 #c41e3a, 11px 11px 0 #c41e3a, 12px 12px 0 #c41e3a, 13px 13px 0 #c41e3a, 14px 14px 0 #c41e3a, 15px 15px 0 #c41e3a, 16px 16px 0 #c41e3a, 17px 17px 0 #c41e3a, 18px 18px 0 #c41e3a, 19px 19px 0 #c41e3a, 20px 20px 0 #c41e3a, 21px 21px 0 #c41e3a;
 }
 .loading-text {
   text-transform: none;
@@ -52,23 +58,24 @@ h1 {
 }
 #social-media {
   position: relative;
-  width: 190px;
-  margin: 0 auto;
+  text-align: center;
+}
+#social-media > div {
+  position: relative;
+  display: inline-block;
+  margin-right: 16px;
 }
 #social-media .facebook {
-  position: absolute;
+  top: 5px;
+  left: 4px;
 }
 #social-media .twitter {
-  position: absolute;
-  left: 65px;
-}
-#social-media .google {
-  position: absolute;
-  left: 136px;
+  top: 1px;
+  margin-right: 20px;
 }
 .other-teams {
   position: relative;
-  top: 130px;
+  margin: 60px;
 }
 .other-teams li {
   font-size: 18px;
@@ -100,6 +107,23 @@ h1 {
   right: 0;
   bottom: 20px;
   text-align: center;
+}
+.upcoming-games .btn {
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 8px 50px;
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.6s;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  font-size: 18px;
+}
+.upcoming-games .btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #000;
 }
 #schedule .months {
   list-style-type: none;
@@ -135,18 +159,18 @@ h1 {
 #schedule .games .month-container.active {
   display: block;
 }
-#schedule .games .month-container ul {
+.games-list {
   list-style-type: none;
-  background-color: rgba(0, 34, 68, 0.4);
+  background-color: rgba(10, 34, 82, 0.4);
   padding: 20px 0;
   display: block;
 }
-#schedule .games .month-container ul li {
+.games-list li {
   font-weight: 300;
   margin: 20px 0;
   font-size: 22px;
 }
-#schedule .games .month-container ul li p {
+.games-list li p {
   margin: 4px 0;
   display: inline-block;
   padding: 0 18px;
