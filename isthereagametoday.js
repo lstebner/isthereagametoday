@@ -112,7 +112,7 @@ function isThereAGameToday(team_data){
             day = start_date.format('dddd');
         }
 
-        details = "Pre-season is coming, it starts on " + day + " at " + data[0].location + " @ " + start_date.format("h:mma");
+        details = "Spring training is coming! It starts on " + day + " at " + data[0].location + " @ " + start_date.format("h:mma");
         tweet_text += details;
     }
     else{
