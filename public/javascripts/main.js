@@ -24,4 +24,25 @@ $(function(){
         ga('create', team_data.tracking_code, team_data.track_url);
         ga('send', 'pageview');
     }
+
+    if ($(".other-teams").length){
+        var $style = $("<style/>").prop("type", "text/css");
+        var styles = [];
+        var selector = "";
+        var color = "";
+
+        $(".other-teams li").each(function(){
+            $a = $(this).children("a");
+            styles.push([$a.data("team"), $a.data("team_color")]);
+        });
+
+        for (var i in styles){
+            selector = ".team-" + styles[i][0] + " a:hover";
+            color = "color: " + styles[i][1] + ";";
+
+            $style.append(selector + "{ " + color + " }\n");
+        }
+
+        $("head").append($style);
+    }
 });

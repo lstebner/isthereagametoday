@@ -11,8 +11,9 @@ html
         meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
         title= title
 
+        link(rel='stylesheet', href='/stylesheets/css/bbclub-font.css')
         link(rel='stylesheet', href='/stylesheets/css/' + team_name + '.css')
-        script(type="text/javascript", src="/javascripts/min/main.min.js")
+        script(type="text/javascript", src="/javascripts/min/main-min.js")
         script(type="text/javascript", src="/javascripts/coffee/main.js")
 
         link(rel="shortcut icon", href="/images/teams/" + team_name + "favicon.ico?v=" + favicon_version, type="image/x-icon")
@@ -49,7 +50,7 @@ html
 
                 if today_data.upcoming_games.length
                     .upcoming-games
-                        .game-details Upcoming games for the #{team_data.name}
+                        p Upcoming games for the #{team_data.name}
                         .games-list
                             for game in today_data.upcoming_games
                                 li
@@ -61,14 +62,15 @@ html
 
 
                 .other-teams
-                    p Check if some other teams are playing around the league
+                    p Check if these other teams are playing around the league
 
                     ul
                         for team in teams_data
                             if team.slug != team_name
-                                li
-                                    a(href="http://www." + team.track_url)= team.name
-                                        span &bull;
+                                li(class="team-#{team.slug}")
+                                    a(href="http://www." + team.track_url, data-team=team.slug, data-team_color=team.primary_color)
+                                        i(class="bb-#{team.abbr} team-logo", title=team.name)
+                                        //- span &bull;
 
                 if process.env.NODE_ENV == "production"
                     .ad-unit

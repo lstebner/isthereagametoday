@@ -7,16 +7,9 @@
         ,"tracking_code": "UA-722424-30"
         ,"track_url": "arethegiantsplayingtoday.com"
         ,"auth_code": "-1ocDCw0Rux5w4GwOpewXKUst8AHg1H743g5SWCiqwY"
-    }
-    ,
-    {
-        "name": "Pittsburgh Pirates"
-        ,"slug": "pirates"
-        ,"hashtag": "#Pirates"
-        ,"hashtag_during_game": "#LetsGoBucs"
-        ,"tracking_code": "UA-8344152-11"
-        ,"track_url": "arethepiratesplayingtoday.com"
-        ,"auth_code": "Mw45lju_E-n2bVeIWGbgSoEGqN240TrgBXU46SizWWU"
+        ,"abbr": "sf"
+        ,"primary_color": "#F2552C"
+        ,"secondary_color": "#000000"
     }
     ,
     {
@@ -27,6 +20,22 @@
         ,"tracking_code": "UA-8344152-12"
         ,"track_url": "aretheindiansplayingtoday.com"
         ,"auth_code": "gTdMwvMyIlhFeBwP4pz2pFVvpghcxabtiwoA3U7vccs"
+        ,"abbr": "cle"
+        ,"primary_color": "#C80810"
+        ,"secondary_color": "#003366"
+    }
+    ,
+    {
+        "name": "Pittsburgh Pirates"
+        ,"slug": "pirates"
+        ,"hashtag": "#Pirates"
+        ,"hashtag_during_game": "#LetsGoBucs"
+        ,"tracking_code": "UA-8344152-11"
+        ,"track_url": "arethepiratesplayingtoday.com"
+        ,"auth_code": "Mw45lju_E-n2bVeIWGbgSoEGqN240TrgBXU46SizWWU"
+        ,"abbr": "pit"
+        ,"primary_color": "#FFBF00"
+        ,"secondary_color": "#000000"
     }
     ,
     {
@@ -37,6 +46,9 @@
         ,"tracking_code": "UA-8344152-15"
         ,"track_url": "arethecardinalsplayingtoday.com"
         ,"auth_code": "TRQktSlJWcwOgY3YqigrXS1B0gA44-2rUcp03Mj82eA"
+        ,"abbr": "stl"
+        ,"primary_color": "#C41E3A"
+        ,"secondary_color": "#0A2252"
     }
     ,
     {
@@ -47,16 +59,9 @@
         ,"tracking_code": "UA-8344152-16"
         ,"track_url": "arethedodgersplayingtoday.com"
         ,"auth_code": "x3TOPolrCX02FXEMG-t25fmEEeI4hbHptbJr9CxA-MA"
-    }
-    ,
-    {
-        "name": "Philadelphia Phillies"
-        ,"slug": "phillies"
-        ,"hashtag": "#Phillies"
-        ,"hashtag_during_game": "#GoPhillies"
-        ,"tracking_code": "UA-8344152-14"
-        ,"track_url": "arethephilliesplayingtoday.com"
-        ,"auth_code": "JcNwX2hUtbbIjJrmLbG1kMyzdu3tsLaAFMoS-DKSKR8"
+        ,"abbr": "la"
+        ,"primary_color": "#083C6B"
+        ,"secondary_color": "#FFFFFF"
     }
     ,
     {
@@ -67,6 +72,9 @@
         ,"tracking_code": "UA-8344152-17"
         ,"track_url": "aretheredsoxplayingtoday.com"
         ,"auth_code": "k8A5hNs_VLdrA5bkFJDya1Y-HUP7eAh1H3pqam8vebU"
+        ,"abbr": "bos-alt"
+        ,"primary_color": "#C60C30"
+        ,"secondary_color": "#002244"
     }
     ,
     {
@@ -77,5 +85,21 @@
         ,"tracking_code": "UA-8344152-13"
         ,"track_url": "aretheyankeesplayingtoday.com"
         ,"auth_code": "NQnknwMwe10w95TuWyyuikOBf6O3WnYfi4SELQoRiYs"
+        ,"abbr": "nyy"
+        ,"primary_color": "#1C2841"
+        ,"secondary_color": "#FFFFFF"
+    }
+    ,
+    {
+        "name": "Philadelphia Phillies"
+        ,"slug": "phillies"
+        ,"hashtag": "#Phillies"
+        ,"hashtag_during_game": "#GoPhillies"
+        ,"tracking_code": "UA-8344152-14"
+        ,"track_url": "arethephilliesplayingtoday.com"
+        ,"auth_code": "JcNwX2hUtbbIjJrmLbG1kMyzdu3tsLaAFMoS-DKSKR8"
+        ,"abbr": "phi"
+        ,"primary_color": "#BA0C2F"
+        ,"secondary_color": "#FFFFFF"
     }
 ]

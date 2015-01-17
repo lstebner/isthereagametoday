@@ -126,18 +126,23 @@ h1 {
     margin: 60px;
 
     li{
-        font-size: 18px;
+        font-size: 38px;
         display: inline-block;
-        margin: 0 12px 0 0;
+        margin: 0 40px 0 0;
 
         a{
-            color: #333;
-            font-weight: 300;
+            color: rgba(75, 75, 75, .6);
+            font-weight: 100;
             text-decoration: none;
+            text-shadow: 1px 1px 1px fade(#fff, 40%);
             .transition(color .4s);
 
+            i{
+                color: inherit;
+            }
+
             &:hover{
-                color: #fafafa;
+                // color: #fafafa;
             }
 
             span{
@@ -168,6 +173,8 @@ h1 {
 }
 
 .upcoming-games{
+    margin-top: 40px;
+
     .btn{
         border: 1px solid #000;
         border-radius: 3px;
@@ -184,6 +191,11 @@ h1 {
             color: #000;
         }
     }
+}
+
+.team-logo{
+    margin: 0 6px;
+    color: #666;
 }
 
 @import 'schedule.less';
