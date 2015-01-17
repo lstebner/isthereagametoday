@@ -15,11 +15,11 @@
 
 @font-face {
     font-family: 'bbclub-font';
-    src: url('/font/bbclub-font-regular-webfont.eot');
-    src: url('/font/bbclub-font-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/font/bbclub-font-regular-webfont.woff') format('woff'),
-         url('/font/bbclub-font-regular-webfont.ttf') format('truetype'),
-         url('/font/bbclub-font-regular-webfont.svg#bbclub-fontregular') format('svg');
+    src: url('/stylesheets/font/bbclub-font-regular-webfont.eot');
+    src: url('/stylesheets/font/bbclub-font-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/stylesheets/font/bbclub-font-regular-webfont.woff') format('woff'),
+         url('/stylesheets/font/bbclub-font-regular-webfont.ttf') format('truetype'),
+         url('/stylesheets/font/bbclub-font-regular-webfont.svg#bbclub-fontregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
