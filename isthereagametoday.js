@@ -11,6 +11,7 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 var _ = require('underscore');
+var _str = require('underscore.string');
 var moment = require('moment');
 
 var app = express();
@@ -25,6 +26,10 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+
+var conf = {
+    ads_enabled: false
+};
 
 var data_year = "2015";
 var teams_data = {};
@@ -202,6 +207,7 @@ function isThereAGameToday(team_data){
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
+  conf.ads_enabled = false;
 }
 
 app.get('/:team/sitemap', function(req, res){
@@ -214,12 +220,14 @@ app.get('/:team/sitemap', function(req, res){
             layout: false
             ,today: moment().format('YYYY-MM-DD')
             ,base_url: 'http://www.' + team_data.track_url
+            ,conf: conf
         });
     }
     else{
         res.send('404', 'sorry!');
     }
 });
+
 app.get('/:team', function(req, res){
     var team = req.params.team.toLowerCase();
     var team_data = {};
@@ -239,6 +247,7 @@ app.get('/:team', function(req, res){
             ,today_data: today_data
             ,meta_description: 'Find out if the ' + team_data.name + ' are playing a baseball game today!'
             ,favicon_version: FAVICON_VERSION
+            ,conf: conf
         });
     }
     else{
@@ -246,7 +255,7 @@ app.get('/:team', function(req, res){
     }
 });
 
-app.get('/:team/schedule', function(req, res){
+app.get('/:team/schedule/:month?', function(req, res){
     var team = req.params.team.toLowerCase();
     var team_data = {};
     var months = [];
@@ -272,8 +281,12 @@ app.get('/:team/schedule', function(req, res){
             });
         });
 
+        var first_month = _.first(_.keys(games_by_month));
+        var selected_month = req.params.month ? req.params.month.toLowerCase() : false;
+        var is_canonical = selected_month ? false : first_month;
+
         res.render('schedule', {
-            title: team_data.name + " " + data_year + " Schedule"
+            title: team_data.name + " " + data_year + " " + (selected_month ? _str.capitalize(selected_month) : _str.capitalize(first_month)) + " Schedule"
             ,base_url: 'http://www.' + team_data.track_url
             ,team_name: team //poorly named, this is really the slug used for javascript stuff
             ,team_data: team_data
@@ -282,8 +295,12 @@ app.get('/:team/schedule', function(req, res){
             ,today_data: today_data
             ,months: months
             ,games_by_month: games_by_month
+            ,selected_month: selected_month
+            ,is_canonical: is_canonical
             ,meta_description: 'View the ' + data_year + ' Schedule for the ' + team_data.name
             ,favicon_version: FAVICON_VERSION
+            ,schedule_url: app.get('env') == "development" ? "/" + team_data.slug + "/schedule" : "/schedule"
+            ,conf: conf
         });
     }
     else{
