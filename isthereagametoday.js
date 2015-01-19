@@ -28,10 +28,10 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 var conf = {
-    ads_enabled: false
+    ads_enabled: false,
+    data_year: 2015
 };
 
-var data_year = "2015";
 var teams_data = {};
 
 fs.readFile(__dirname + '/teams_data.json', function(err, contents){
@@ -75,7 +75,7 @@ var load_games_data = function(team, store){
         }
     };
 
-    fs.readFile(__dirname + "/schedules/" + data_year + "_" + team + '.csv', 'UTF-8', function(err, contents){
+    fs.readFile(__dirname + "/schedules/" + conf.data_year + "_" + team + '.csv', 'UTF-8', function(err, contents){
         if (!err){
             _.each(contents.split("\n"), function(line, i){
                 if (!_.isEmpty(line)){
@@ -286,7 +286,7 @@ app.get('/:team/schedule/:month?', function(req, res){
         var is_canonical = selected_month ? false : first_month;
 
         res.render('schedule', {
-            title: team_data.name + " " + data_year + " " + (selected_month ? _str.capitalize(selected_month) : _str.capitalize(first_month)) + " Schedule"
+            title: team_data.name + " " + conf.data_year + " " + (selected_month ? _str.capitalize(selected_month) : _str.capitalize(first_month)) + " Schedule"
             ,base_url: 'http://www.' + team_data.track_url
             ,team_name: team //poorly named, this is really the slug used for javascript stuff
             ,team_data: team_data
@@ -297,7 +297,7 @@ app.get('/:team/schedule/:month?', function(req, res){
             ,games_by_month: games_by_month
             ,selected_month: selected_month
             ,is_canonical: is_canonical
-            ,meta_description: 'View the ' + data_year + ' Schedule for the ' + team_data.name
+            ,meta_description: 'View the ' + conf.data_year + ' Schedule for the ' + team_data.name
             ,favicon_version: FAVICON_VERSION
             ,schedule_url: app.get('env') == "development" ? "/" + team_data.slug + "/schedule" : "/schedule"
             ,conf: conf
