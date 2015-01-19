@@ -28,6 +28,8 @@ html
             script.
                 send_tracking = false;
 
+        block head
+
     body
         block content
             .game-details Are the #{team_data.name} playing a game today?
@@ -72,7 +74,7 @@ html
                                         i(class="bb-#{team.abbr} team-logo", title=team.name)
                                         //- span &bull;
 
-                if process.env.NODE_ENV == "production"
+                if conf.ads_enabled
                     .ad-unit
                         include ad.html
 

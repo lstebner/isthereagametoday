@@ -1,25 +1,38 @@
 extends layout
 
+block head
+    if is_canonical
+        link(rel="canonical", href="#{schedule_url}/#{is_canonical}")
+
 block content
-    #schedule
+    #schedule(data-show_month=selected_month)
         ul.months
             for month in months
+                - month_org = month
                 - classes = []
                 if month == today_data.month
                     - classes.push('active')
+                - month = month.toLowerCase()
 
                 li
-                    a(href="#", class=classes.join(' '), data-month=month).month_link= month
+                    a(href="#{schedule_url}/#{month}", class=classes.join(' '), data-month=month).month_link= month_org
 
         .games
             for games, month in games_by_month
                 - classes = []
                 if month == today_data.month
                     - classes.push('active')
+                - month = month.toLowerCase()
 
                 .month-container(data-month=month, class=classes.join(' '))
                     ul.games-list
-                        for game in games
+                        for game, i in games
                             li
                                 p.date= game.date_formatted
                                 p.details= game.details
+
+                            if i == 5
+                                li
+                                    if conf.ads_enabled
+                                        .ad-unit
+                                            include ad.html
