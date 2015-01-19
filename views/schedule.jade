@@ -7,6 +7,9 @@ block head
 block content
     #schedule(data-show_month=selected_month)
         ul.months
+            li
+                a(href=base_url) Today
+                
             for month in months
                 - month_org = month
                 - classes = []
