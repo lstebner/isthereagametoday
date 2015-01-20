@@ -110,7 +110,7 @@ function isThereAGameToday(team_data){
 
     if (now.unix() < start_date.unix()){
         is_there = 'No';
-        if (start_date.get('month') == now.get('month') && start_date.get('day') == now.get('day') + 1){
+        if (start_date.get('month') == now.get('month') && start_date.get('date') == now.get('date') + 1){
             day = 'tomorrow';
         }
         else{
@@ -147,7 +147,7 @@ function isThereAGameToday(team_data){
                         next_game_start_date = moment(new Date(data[parseInt(i)+1].start_date));
 
                         if (next_game_start_date != "Invalid Date"){
-                            if (next_game_start_date.get('day') == now.get('day') + 1){
+                            if (start_date.get('month') == now.get('month') && start_date.get('date') == now.get('date') + 1){
                                 day = 'tomorrow';
                             }
                             else{
@@ -183,7 +183,8 @@ function isThereAGameToday(team_data){
         }
     }
 
-    upcoming_games = data.slice(current_game_idx, 3);
+    upcoming_games = data.slice(current_game_idx, parseInt(current_game_idx) + 3);
+
     _.each(upcoming_games, function(gameday, idx){
         var start_date = moment(new Date(gameday.start_date + " " + gameday.start_time));
 
