@@ -110,14 +110,14 @@ function isThereAGameToday(team_data){
 
     if (now.unix() < start_date.unix()){
         is_there = 'No';
-        if (start_date.get('day') == now.get('day') + 1){
+        if (start_date.get('month') == now.get('month') && start_date.get('day') == now.get('day') + 1){
             day = 'tomorrow';
         }
         else{
             day = start_date.format('dddd');
         }
 
-        details = "Spring training is coming! It starts on " + day + " at " + data[0].location + " @ " + start_date.format("h:mma");
+        details = "Spring training is coming! It starts on " + day + ", " + start_date.format('MMMM Do') + " at " + data[0].location + " @ " + start_date.format("h:mma");
         tweet_text += details;
     }
     else{
