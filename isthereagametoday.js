@@ -28,7 +28,7 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 var conf = {
-    ads_enabled: false,
+    ads_enabled: true,
     data_year: 2015
 };
 
