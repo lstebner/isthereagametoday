@@ -105,8 +105,8 @@ h1 {
 .ad-unit {
   left: 0;
   right: 0;
-  bottom: 20px;
   text-align: center;
+  margin: 20px 0;
 }
 .upcoming-games {
   margin-top: 40px;

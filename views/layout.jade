@@ -54,14 +54,19 @@ html
                     .upcoming-games
                         p Upcoming games for the #{team_data.name}
                         .games-list
-                            for game in today_data.upcoming_games
+                            for game, i in today_data.upcoming_games
                                 li
+                                    if i == 0
+                                        span.icon-arrow-right
                                     p.date= game.date_formatted
                                     p.details= game.details
 
                             li
                                 a(href="/schedule").btn View the full #{conf.data_year} schedule
 
+                if conf.ads_enabled
+                    .ad-unit
+                        include ad.html
 
                 .other-teams
                     p Check if these other teams are playing around the league
@@ -74,9 +79,6 @@ html
                                         i(class="bb-#{team.abbr} team-logo", title=team.name)
                                         //- span &bull;
 
-                if conf.ads_enabled
-                    .ad-unit
-                        include ad.html
 
 
         input(type="hidden", name="team_name", value=team_name)
