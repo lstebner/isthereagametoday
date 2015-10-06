@@ -263,7 +263,7 @@ app.get('/:team', function(req, res){
             ,team_data_clean: _.omit(team_data, 'schedule', 'formatted_schedule')
             ,teams_data: teams_data
             ,today_data: today_data
-            ,meta_description: 'Find out if the ' + team_data.name + ' are playing a baseball game today!'
+            ,meta_description: 'Find out if the ' + team_data.name + ' are playing a ' + (team_data.league == "mlb" ? "baseball" : "hockey") + ' game today!'
             ,favicon_version: FAVICON_VERSION
             ,conf: conf
         });
