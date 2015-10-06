@@ -20,7 +20,7 @@ h1 {
   padding: 0 20px 0 20px;
 }
 .game-details {
-  color: #05535d;
+  color: #008697;
   font-size: 20px;
   line-height: 26px;
   font-family: Helvetica Neue;
@@ -42,7 +42,7 @@ h1 {
   display: none;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0px 0px 0 #05535d, 1px 1px 0 #05535d, 2px 2px 0 #05535d, 3px 3px 0 #05535d, 4px 4px 0 #05535d, 5px 5px 0 #05535d, 6px 6px 0 #05535d, 7px 7px 0 #05535d, 8px 8px 0 #05535d, 9px 9px 0 #05535d, 10px 10px 0 #05535d, 11px 11px 0 #05535d, 12px 12px 0 #05535d, 13px 13px 0 #05535d, 14px 14px 0 #05535d, 15px 15px 0 #05535d, 16px 16px 0 #05535d, 17px 17px 0 #05535d, 18px 18px 0 #05535d, 19px 19px 0 #05535d, 20px 20px 0 #05535d, 21px 21px 0 #05535d;
+  text-shadow: 0px 0px 0 #008697, 1px 1px 0 #008697, 2px 2px 0 #008697, 3px 3px 0 #008697, 4px 4px 0 #008697, 5px 5px 0 #008697, 6px 6px 0 #008697, 7px 7px 0 #008697, 8px 8px 0 #008697, 9px 9px 0 #008697, 10px 10px 0 #008697, 11px 11px 0 #008697, 12px 12px 0 #008697, 13px 13px 0 #008697, 14px 14px 0 #008697, 15px 15px 0 #008697, 16px 16px 0 #008697, 17px 17px 0 #008697, 18px 18px 0 #008697, 19px 19px 0 #008697, 20px 20px 0 #008697, 21px 21px 0 #008697;
 }
 .loading-text {
   text-transform: none;
@@ -172,12 +172,12 @@ h1 {
   padding: 20px 0;
   display: block;
 }
-.games-list li {
+.games-list .row {
   font-weight: 300;
   margin: 20px 0;
   font-size: 22px;
 }
-.games-list li p {
+.games-list .row p {
   margin: 4px 0;
   display: inline-block;
   padding: 0 18px;
@@ -201,4 +201,76 @@ h1 {
   .other-teams li a span {
     display: none;
   }
+}
+.nhl_layout a {
+  text-decoration: none;
+  font-weight: 100;
+  margin: 10px 0;
+}
+.nhl_layout .left_col,
+.nhl_layout .right_col {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.nhl_layout .content_container {
+  position: relative;
+  margin: 20px;
+}
+.nhl_layout .left_col {
+  left: 0;
+  width: 35vw;
+  background-color: #008697;
+}
+.nhl_layout .right_col {
+  right: 0;
+  width: 65vw;
+  background-color: #fafafa;
+}
+.nhl_layout .game-details {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 100;
+  text-shadow: none;
+  letter-spacing: 1px;
+  line-height: 1.1em;
+}
+.nhl_layout .logo img {
+  width: 280px;
+  height: 220px;
+}
+.nhl_layout h1 {
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.nhl_layout h2 {
+  color: #008697;
+  font-weight: 100;
+  text-align: left;
+  text-shadow: none;
+  margin: 0;
+  margin-left: 50px;
+}
+.nhl_layout .games-list {
+  background-color: inherit;
+  text-align: left;
+  border: 1px solid #d8d8d8;
+  padding: 0;
+  margin: 8px 50px 20px;
+}
+.nhl_layout .games-list .row {
+  margin: 0;
+  border-bottom: 1px solid #d8d8d8;
+  padding: 20px;
+}
+.nhl_layout .games-list .row:last-child {
+  border-bottom: none;
+}
+.nhl_layout .games-list p {
+  padding: 0;
+}
+.nhl_layout .games-list .date {
+  margin-right: 20px;
 }

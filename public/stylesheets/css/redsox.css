@@ -172,12 +172,12 @@ h1 {
   padding: 20px 0;
   display: block;
 }
-.games-list li {
+.games-list .row {
   font-weight: 300;
   margin: 20px 0;
   font-size: 22px;
 }
-.games-list li p {
+.games-list .row p {
   margin: 4px 0;
   display: inline-block;
   padding: 0 18px;
@@ -201,4 +201,76 @@ h1 {
   .other-teams li a span {
     display: none;
   }
+}
+.nhl_layout a {
+  text-decoration: none;
+  font-weight: 100;
+  margin: 10px 0;
+}
+.nhl_layout .left_col,
+.nhl_layout .right_col {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.nhl_layout .content_container {
+  position: relative;
+  margin: 20px;
+}
+.nhl_layout .left_col {
+  left: 0;
+  width: 35vw;
+  background-color: #c60c30;
+}
+.nhl_layout .right_col {
+  right: 0;
+  width: 65vw;
+  background-color: #fafafa;
+}
+.nhl_layout .game-details {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 100;
+  text-shadow: none;
+  letter-spacing: 1px;
+  line-height: 1.1em;
+}
+.nhl_layout .logo img {
+  width: 280px;
+  height: 220px;
+}
+.nhl_layout h1 {
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.nhl_layout h2 {
+  color: #c60c30;
+  font-weight: 100;
+  text-align: left;
+  text-shadow: none;
+  margin: 0;
+  margin-left: 50px;
+}
+.nhl_layout .games-list {
+  background-color: inherit;
+  text-align: left;
+  border: 1px solid #d8d8d8;
+  padding: 0;
+  margin: 8px 50px 20px;
+}
+.nhl_layout .games-list .row {
+  margin: 0;
+  border-bottom: 1px solid #d8d8d8;
+  padding: 20px;
+}
+.nhl_layout .games-list .row:last-child {
+  border-bottom: none;
+}
+.nhl_layout .games-list p {
+  padding: 0;
+}
+.nhl_layout .games-list .date {
+  margin-right: 20px;
 }

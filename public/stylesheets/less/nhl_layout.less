@@ -1,0 +1,86 @@
+a{
+    text-decoration: none;
+    font-weight: 100;
+    margin: 10px 0;
+}
+
+.left_col, .right_col{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.content_container{
+    position: relative;
+    margin: 20px;
+}
+
+.left_col{
+    left: 0;
+    width: 35vw;
+    background-color: @primary_color;
+}
+
+.right_col{
+    right: 0;
+    width: 65vw;
+    background-color: #fafafa;
+}
+
+.game-details{
+    color: #fff;
+    font-size: 32px;
+    font-weight: 100;
+    text-shadow: none;
+    letter-spacing: 1px; //how did this get affected?
+    line-height: 1.1em;
+}
+
+.logo{
+    img{
+        width: 280px;
+        height: 220px;
+    }
+}
+
+h1{
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+h2{
+    color: @primary_color;
+    font-weight: 100;
+    text-align: left;
+    text-shadow: none;
+    margin: 0;
+    margin-left: 50px;
+}
+
+.games-list{
+    background-color: inherit;
+    text-align: left;
+    border: 1px solid #d8d8d8;
+    padding: 0;
+    margin: 8px 50px 20px;
+
+    .row{
+        margin: 0;
+        border-bottom: 1px solid #d8d8d8;
+        padding: 20px;
+
+        &:last-child{
+            border-bottom: none;
+        }
+    }
+
+    p{
+        padding: 0;
+    }
+
+    .date{
+        margin-right: 20px;
+    }
+}

@@ -55,13 +55,13 @@ html
                         p Upcoming games for the #{team_data.name}
                         .games-list
                             for game, i in today_data.upcoming_games
-                                li
+                                .row
                                     if i == 0
                                         span.icon-arrow-right
                                     p.date= game.date_formatted
                                     p.details= game.details
 
-                            li
+                            .row
                                 a(href="/schedule").btn View the full #{conf.data_year} schedule
 
                 if conf.ads_enabled

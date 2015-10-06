@@ -117,7 +117,13 @@ function isThereAGameToday(team_data){
             day = start_date.format('dddd');
         }
 
-        details = "Spring training is coming! It starts on " + day + ", " + start_date.format('MMMM Do') + " at " + data[0].location + " @ " + start_date.format("h:mma");
+        if (team_data.league == "mlb"){
+            details = "Spring training is coming! It starts on " + day + ", " + start_date.format('MMMM Do') + " at " + data[0].location + " @ " + start_date.format("h:mma");
+        }
+        else{
+            details = "The season starts on " + day + ", " + start_date.format('M/D') + " at the " + data[0].location.substr(0, data[0].location.indexOf(" -"));
+        }
+
         tweet_text += details;
     }
     else{
@@ -183,14 +189,19 @@ function isThereAGameToday(team_data){
         }
     }
 
-    upcoming_games = data.slice(current_game_idx, parseInt(current_game_idx) + 3);
+    upcoming_games = data.slice(current_game_idx, parseInt(current_game_idx) + 5);
 
     _.each(upcoming_games, function(gameday, idx){
         var start_date = moment(new Date(gameday.start_date + " " + gameday.start_time));
 
         upcoming_games[idx].datetime = start_date.valueOf();
-        upcoming_games[idx].date_formatted = start_date.format('dddd M/DD/YYYY');
-        upcoming_games[idx].details = gameday.against + ' at ' + gameday.location + ' @ ' + start_date.format('H:mma')
+        upcoming_games[idx].date_formatted = start_date.format('M/D');
+        if (team_data.league == "mlb"){
+            upcoming_games[idx].details = gameday.against + ' at ' + gameday.location + ' @ ' + start_date.format('h:mma')
+        }
+        else{
+            upcoming_games[idx].details = gameday.against + ' at the ' + gameday.location.substr(0, gameday.location.indexOf(" -")) + '. Puck drops at ' + start_date.format('h:mma')
+        }
     });
 
     return {
@@ -238,7 +249,13 @@ app.get('/:team', function(req, res){
 
         today_data = isThereAGameToday(team_data);
 
-        res.render('index', {
+        layout = "index";
+
+        if (team_data.league == "nhl"){
+            layout = "index_new"; //classic
+        }
+
+        res.render(layout, {
             title: 'Are the ' + team_data.name + ' Playing Today?'
             ,base_url: 'http://' + req.headers.host
             ,team_name: team //poorly named, this is really the slug used for javascript stuff

@@ -1,0 +1,84 @@
+doctype html
+html
+    head
+        meta(property='og:image', content=base_url + '/images/teams/' + team_name + '/logo.jpg')
+        meta(property='og:title', content=title)
+        meta(property='og:description', content=meta_description)
+        meta(property='og:url', content=base_url)
+        meta(property='og:type', content='website')
+        meta(name='title', content=title)
+        meta(name='description', content=meta_description)
+        meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
+        title= title
+
+        link(rel='stylesheet', href='/stylesheets/css/bbclub-font.css')
+        link(rel='stylesheet', href='/stylesheets/css/' + team_name + '.css')
+        script(type="text/javascript", src="/javascripts/min/main-min.js")
+        script(type="text/javascript", src="/javascripts/coffee/main.js")
+
+        link(rel="shortcut icon", href="/images/teams/" + team_name + "favicon.ico?v=" + favicon_version, type="image/x-icon")
+        link(rel="icon", href="/images/teams/" + team_name + "/favicon.ico?v=" + favicon_version, type="image/x-icon")
+
+        if process.env.NODE_ENV == 'production'
+            meta(name="google-site-verification", content=team_data.auth_code)
+            include tracking.jade
+            script.
+                send_tracking = true;
+        else
+            script.
+                send_tracking = false;
+
+        block head
+
+    body.nhl_layout
+        block content
+            .left_col
+                .content_container
+                    .logo
+                        img(src="/images/teams/#{team_name}/logo.jpg")
+
+                    h1= team_data.name
+
+                    .game-details= today_data.details
+
+                    #footer
+                        #social-media
+                            .facebook
+                                iframe(src='//www.facebook.com/plugins/like.php?href=' + base_url + '&width=55&layout=box_count&action=like&show_faces=false&share=false&height=65', scrolling='no', frameborder='0', style='border: none; overflow: hidden; width: 55px; height: 65px;', allowtransparency='true')
+                            .twitter
+                                a.twitter-share-button(href='https://twitter.com/share', data-url=base_url, data-text=today_data.tweet_text, data-related='zoinc', data-count='vertical')
+                                    script.
+                                        tbn = function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}
+                            .google
+                                .g-plus(data-action='share', data-annotation='vertical-bubble', data-height='60', data-href=base_url)
+                                script(type='text/javascript').
+                                    (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/platform.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();
+
+
+            .right_col
+                .content_container
+                    if today_data.upcoming_games.length
+                        .upcoming-games
+                            h2 Upcoming games
+                            .games-list
+                                for game, i in today_data.upcoming_games
+                                    .row
+                                        if i == 0
+                                            span.icon-arrow-right
+                                        p.date= game.date_formatted
+                                        p.details= game.details
+
+                        a(href="/schedule").show_remaining_games_btn Show remaining games
+
+                    if conf.ads_enabled
+                        .ad-unit
+                            include ad.html
+
+
+
+
+        input(type="hidden", name="team_name", value=team_name)
+        input(type="hidden", name="games_url", value=(process.env.NODE_ENV == "production" ? "/games-data" : "/games-data/" + team_name))
+        input(type="hidden", name="team_data", value=JSON.stringify(team_data_clean))
+        input(type="hidden", name="today_data", value=JSON.stringify(today_data))
+
