@@ -10,6 +10,9 @@ var team_name = ""
 ;
 
 $(function(){
+    var win_height = $(window).height();
+    var NHL_LAYOUT = $(document.body).hasClass("nhl_layout");
+
     if (typeof(tbn) == "undefined"){
         tbn = function(){};
     }
@@ -44,5 +47,15 @@ $(function(){
         }
 
         $("head").append($style);
+    }
+
+    if (NHL_LAYOUT){
+        $(".logo img").load(function(){
+            $(".left_col .content_container, .right_col .content_container").each(function(){
+                var height = $(this).outerHeight();
+                var newtop = (win_height - height) / 2;
+                $(this).css("top", newtop);
+            });
+        });
     }
 });
