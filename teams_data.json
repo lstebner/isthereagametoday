@@ -10,6 +10,7 @@
         ,"abbr": "sf"
         ,"primary_color": "#F2552C"
         ,"secondary_color": "#000000"
+        ,"league": "mlb"
     }
     ,
     {
@@ -23,6 +24,7 @@
         ,"abbr": "cle"
         ,"primary_color": "#C80810"
         ,"secondary_color": "#003366"
+        ,"league": "mlb"
     }
     ,
     {
@@ -36,6 +38,7 @@
         ,"abbr": "pit"
         ,"primary_color": "#FFBF00"
         ,"secondary_color": "#000000"
+        ,"league": "mlb"
     }
     ,
     {
@@ -49,6 +52,7 @@
         ,"abbr": "stl"
         ,"primary_color": "#C41E3A"
         ,"secondary_color": "#0A2252"
+        ,"league": "mlb"
     }
     ,
     {
@@ -62,6 +66,7 @@
         ,"abbr": "la"
         ,"primary_color": "#083C6B"
         ,"secondary_color": "#FFFFFF"
+        ,"league": "mlb"
     }
     ,
     {
@@ -75,6 +80,7 @@
         ,"abbr": "bos-alt"
         ,"primary_color": "#C60C30"
         ,"secondary_color": "#002244"
+        ,"league": "mlb"
     }
     ,
     {
@@ -88,6 +94,7 @@
         ,"abbr": "nyy"
         ,"primary_color": "#1C2841"
         ,"secondary_color": "#FFFFFF"
+        ,"league": "mlb"
     }
     ,
     {
@@ -101,5 +108,20 @@
         ,"abbr": "phi"
         ,"primary_color": "#BA0C2F"
         ,"secondary_color": "#FFFFFF"
+        ,"league": "mlb"
+    }
+    ,
+    {
+        "name": "San Jose Sharks"
+        ,"slug": "sharks"
+        ,"hashtag": "#sjsharks"
+        ,"hashtag_during_game": "#GoSharks"
+        ,"tracking_code": "UA-8344152-##"
+        ,"track_url": "arethesharksplayingtoday.com"
+        ,"auth_code": "XXXXXXXX"
+        ,"abbr": "sjs"
+        ,"primary_color": "#05535D"
+        ,"secondary_color": "#F38F20"
+        ,"league": "nhl"
     }
 ]
