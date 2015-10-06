@@ -68,11 +68,11 @@ html
                                         p.date= game.date_formatted
                                         p.details= game.details
 
-                        a(href="/schedule").show_remaining_games_btn Show remaining games
+                        //- a(href="/schedule").show_remaining_games_btn Show remaining games
 
-                    if conf.ads_enabled
-                        .ad-unit
-                            include ad.html
+                if conf.ads_enabled
+                    .ad-unit
+                        include ad.html
 
 
 

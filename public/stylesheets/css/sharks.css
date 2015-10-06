@@ -274,3 +274,7 @@ h1 {
 .nhl_layout .games-list .date {
   margin-right: 20px;
 }
+.nhl_layout .ad-unit {
+  position: absolute;
+  bottom: 0;
+}

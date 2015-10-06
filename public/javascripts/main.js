@@ -50,12 +50,10 @@ $(function(){
     }
 
     if (NHL_LAYOUT){
-        $(".logo img").load(function(){
-            $(".left_col .content_container, .right_col .content_container").each(function(){
-                var height = $(this).outerHeight();
-                var newtop = (win_height - height) / 2;
-                $(this).css("top", newtop);
-            });
+        $(".left_col .content_container, .right_col .content_container").each(function(){
+            var height = $(this).outerHeight();
+            var newtop = (win_height - height) / 2;
+            $(this).css("top", newtop);
         });
     }
 });
