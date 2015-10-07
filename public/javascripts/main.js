@@ -7,6 +7,7 @@ var team_name = ""
     ,today_data = null
     ,games_feed = '/games-data'
     ,World = {}
+    ,resize_columns = null
 ;
 
 $(function(){
@@ -50,10 +51,20 @@ $(function(){
     }
 
     if (NHL_LAYOUT){
-        $(".left_col .content_container, .right_col .content_container").each(function(){
-            var height = $(this).outerHeight();
-            var newtop = (win_height - height) / 2;
-            $(this).css("top", newtop - 40);
-        });
+        resize_columns = function(){
+            if ($(window).width() < 769){
+                return false;
+            }
+
+            $(".left_col .content_container, .right_col .content_container").each(function(){
+                var height = $(this).outerHeight();
+                var newtop = (win_height - height) / 2;
+                $(this).css("top", newtop - 40);
+            });
+        };
+
+        resize_columns();
+
+        $(window).on("resize", resize_columns);
     }
 });
