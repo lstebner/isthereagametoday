@@ -25,6 +25,7 @@ a{
     right: 0;
     width: 65vw;
     background-color: #fafafa;
+    overflow-y: scroll;
 }
 
 .game-details{
@@ -39,7 +40,6 @@ a{
 .logo{
     img{
         width: 280px;
-        height: 220px;
     }
 }
 
@@ -70,6 +70,7 @@ h2{
         margin: 0;
         border-bottom: 1px solid #d8d8d8;
         padding: 20px;
+        font-size: 16px;
 
         &:last-child{
             border-bottom: none;
@@ -88,4 +89,91 @@ h2{
 .ad-unit{
     position: absolute;
     bottom: 0;
+}
+
+@media screen and (max-device-width: 1024px){
+
+}
+
+@media screen and (max-device-width: 768px) and (min-device-width: 736px){
+    .left_col{
+        left: 0;
+        right: 0;
+        top: 0;
+        width: auto;
+        height: 54vh;
+    }
+
+    .right_col{
+        left: 0;
+        right: 0;
+        top: 54vh;
+        height: 46vh;
+        width: auto;
+    }
+}
+
+@media screen and (max-device-width: 736px){
+    .logo{
+        margin-top: 15px;
+
+        img{
+            width: 120px;
+        }
+    }
+
+    h1{
+        padding: 0;
+    }
+
+    .game-details{
+        font-size: 16px;
+    }
+
+    #footer{
+        padding: 12px 0 0 0;
+        margin: 2px 0 0 0;
+    }
+
+    .content_container{
+        margin: 0 4px;
+    }
+
+    .upcoming-games{
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-device-width: 414px){
+    .left_col{
+        left: 0;
+        right: 0;
+        top: 0;
+        width: auto;
+        height: 54vh;
+    }
+
+    .right_col{
+        left: 0;
+        right: 0;
+        top: 54vh;
+        height: 46vh;
+        width: auto;
+    }
+
+    .logo{
+        img{
+            width: 110px;
+        }
+    }
+
+    #social-media{
+        .facebook{
+            margin-right: 5px;
+        }
+
+        .twitter{
+            margin-right: 8px;
+        }
+    }
 }

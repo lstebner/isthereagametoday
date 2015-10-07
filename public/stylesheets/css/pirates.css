@@ -226,6 +226,7 @@ h1 {
   right: 0;
   width: 65vw;
   background-color: #fafafa;
+  overflow-y: scroll;
 }
 .nhl_layout .game-details {
   color: #fff;
@@ -237,7 +238,6 @@ h1 {
 }
 .nhl_layout .logo img {
   width: 280px;
-  height: 220px;
 }
 .nhl_layout h1 {
   color: #fff;
@@ -264,6 +264,7 @@ h1 {
   margin: 0;
   border-bottom: 1px solid #d8d8d8;
   padding: 20px;
+  font-size: 16px;
 }
 .nhl_layout .games-list .row:last-child {
   border-bottom: none;
@@ -277,4 +278,69 @@ h1 {
 .nhl_layout .ad-unit {
   position: absolute;
   bottom: 0;
+}
+@media screen and (max-device-width: 768px) and (min-device-width: 736px) {
+  .nhl_layout .left_col {
+    left: 0;
+    right: 0;
+    top: 0;
+    width: auto;
+    height: 54vh;
+  }
+  .nhl_layout .right_col {
+    left: 0;
+    right: 0;
+    top: 54vh;
+    height: 46vh;
+    width: auto;
+  }
+}
+@media screen and (max-device-width: 736px) {
+  .nhl_layout .logo {
+    margin-top: 15px;
+  }
+  .nhl_layout .logo img {
+    width: 120px;
+  }
+  .nhl_layout h1 {
+    padding: 0;
+  }
+  .nhl_layout .game-details {
+    font-size: 16px;
+  }
+  .nhl_layout #footer {
+    padding: 12px 0 0 0;
+    margin: 2px 0 0 0;
+  }
+  .nhl_layout .content_container {
+    margin: 0 4px;
+  }
+  .nhl_layout .upcoming-games {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-device-width: 414px) {
+  .nhl_layout .left_col {
+    left: 0;
+    right: 0;
+    top: 0;
+    width: auto;
+    height: 54vh;
+  }
+  .nhl_layout .right_col {
+    left: 0;
+    right: 0;
+    top: 54vh;
+    height: 46vh;
+    width: auto;
+  }
+  .nhl_layout .logo img {
+    width: 110px;
+  }
+  .nhl_layout #social-media .facebook {
+    margin-right: 5px;
+  }
+  .nhl_layout #social-media .twitter {
+    margin-right: 8px;
+  }
 }
