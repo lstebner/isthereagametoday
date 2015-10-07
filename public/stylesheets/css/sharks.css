@@ -296,6 +296,9 @@ h1 {
   }
 }
 @media screen and (max-device-width: 736px) {
+  .nhl_layout .ad-unit {
+    display: none;
+  }
   .nhl_layout .logo {
     margin-top: 15px;
   }
