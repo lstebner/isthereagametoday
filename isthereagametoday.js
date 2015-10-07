@@ -118,10 +118,10 @@ function isThereAGameToday(team_data){
         }
 
         if (team_data.league == "mlb"){
-            details = "Spring training is coming! It starts on " + day + ", " + start_date.format('MMMM Do') + " at " + data[0].location + " @ " + start_date.format("h:mma");
+            details = "Spring training is coming! It starts " + (day != "tomorrow" ? "on" : "") + day + ", " + start_date.format('MMMM Do') + " at " + data[0].location + " @ " + start_date.format("h:mma");
         }
         else{
-            details = "The season starts on " + day + ", " + start_date.format('M/D') + " at the " + data[0].location.substr(0, data[0].location.indexOf(" -"));
+            details = "The season starts " + (day != "tomorrow" ? "on" : "") + day + ", " + start_date.format('M/D') + " at the " + data[0].location.substr(0, data[0].location.indexOf(" -"));
         }
 
         tweet_text += details;
