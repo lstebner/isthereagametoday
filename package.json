@@ -10,6 +10,7 @@
     "jade": "*",
     "underscore": " *",
     "underscore.string": "*",
-    "moment": "*"
+    "moment": "*",
+    "mongoose": "*"
   }
 }
