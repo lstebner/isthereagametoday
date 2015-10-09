@@ -1,1 +1,357 @@
-function isThereAGameToday(e){var a=moment(),t=5184e3,o=moment().add(1,"days"),s=null,n=null,r=0,d=0,s="",m="No",i="Are the "+e.hashtag+" playing today? ",l="",u=e.formatted_schedule,p=null,c="",h=moment(new Date(u[0].start_date+" "+u[0].start_time)),f=[],g=0;if(a.unix()<h.unix())m="No",c=h.get("month")==a.get("month")&&h.get("date")==a.get("date")+1?"tomorrow":h.format("dddd"),l="mlb"==e.league?"Spring training is coming! It starts "+("tomorrow"!=c?"on":"")+c+", "+h.format("MMMM Do")+" at "+u[0].location+" @ "+h.format("h:mma"):"The season starts "+("tomorrow"!=c?"on":"")+c+", "+h.format("M/D")+" at the "+u[0].location.substr(0,u[0].location.indexOf(" -")),i+=l;else for(var y in u){if(h=moment(new Date(u[y].start_date+" "+u[y].start_time)),n=moment(new Date(u[y].end_date+" "+u[y].end_time)),a.format("MMDD")==h.format("MMDD")){m="Yes",i+="Yes!",a.unix()<n.unix()?a.unix()>h.unix()?(l="they're playing right now at "+u[y].location+" against the "+u[y].against+"!",i+=" Right now against the "+u[y].against+"! "+e.hashtag_during_game):(s=h.format("h:mma"),l="at "+u[y].location+" against The "+u[y].against+" @ "+s,i+=" Starting at "+s+" against the "+u[y].against):(l="but it's already over.",u.length>y&&(p=moment(new Date(u[parseInt(y)+1].start_date)),"Invalid Date"!=p&&(c=h.get("month")==a.get("month")&&h.get("date")==a.get("date")+1?"tomorrow":p.format("dddd"),l+=" The next game is scheduled for "+c+" at "+u[parseInt(y)+1].location+" @ "+p.format("h:mma")))),g=y;break}if("no"==m.toLowerCase()&&n.unix()>a.unix()){p=moment(new Date(u[y].start_date+" "+u[y].start_time)),p.isValid()&&(c=p.get("day")==a.get("day")+1?"tomorrow":p.format("dddd"),l="Not today, looks like the next scheduled game is "+c+" at "+u[y].location+" @ "+p.format("h:mma"),i+="Not today, the next scheduled game is "+c+" at "+u[y].location+" @ "+p.format("h:mma")),g=y;break}}return f=u.slice(g,parseInt(g)+5),_.each(f,function(a,t){var o=moment(new Date(a.start_date+" "+a.start_time));f[t].datetime=o.valueOf(),f[t].date_formatted=o.format("M/D"),"mlb"==e.league?f[t].details=a.against+" at "+a.location+" @ "+o.format("h:mma"):f[t].details=a.against+" at the "+a.location.substr(0,a.location.indexOf(" -"))+". Puck drops at "+o.format("h:mma")}),{is_there:m,tweet_text:i,details:l,start_date:h?h.valueOf():null,month:h.format("MMMM"),day:h.format("dddd"),next_game_start_date:p?p.valueOf():null,upcoming_games:f}}var FAVICON_VERSION=2,express=require("express"),routes=require("./routes"),user=require("./routes/user"),http=require("http"),path=require("path"),fs=require("fs"),_=require("underscore"),_str=require("underscore.string"),moment=require("moment"),app=express();app.set("port",3035),app.set("views",path.join(__dirname,"views")),app.set("view engine","jade"),app.use(express.logger("dev")),app.use(express.json()),app.use(express.urlencoded()),app.use(express.methodOverride()),app.use(app.router),app.use(express["static"](path.join(__dirname,"public")));var conf={ads_enabled:!0,data_year:2015},teams_data={};fs.readFile(__dirname+"/teams_data.json",function(e,a){if(!e){var t=JSON.parse(a);t&&_.each(t,function(e){teams_data[e.slug]=_.extend({schedule:[]},e),load_games_data(e.slug,!0)})}});var load_games_data=function(e,a){var t=[],o=function(){a&&(_.has(teams_data,e)||(teams_data[e]={}),teams_data[e].schedule=t,teams_data[e].formatted_schedule=[],_.each(t,function(a,o){var s={};o>0&&(_.each(t[0],function(e,t){e=e.toLowerCase(),s[e]=a[t]}),teams_data[e].formatted_schedule.push(s))}))};fs.readFile(__dirname+"/schedules/"+conf.data_year+"_"+e+".csv","UTF-8",function(e,a){e||(_.each(a.split("\n"),function(e,a){_.isEmpty(e)||t.push(e.split(","))}),o())})};"development"==app.get("env")&&(app.use(express.errorHandler()),conf.ads_enabled=!1),app.get("/:team/sitemap",function(e,a){var t=e.params.team.toLowerCase();_.indexOf(_.keys(teams_data),t)>-1?(team_data=teams_data[t],a.render("sitemap",{layout:!1,today:moment().format("YYYY-MM-DD"),base_url:"http://www."+team_data.track_url,conf:conf})):a.send("404","sorry!")}),app.get("/:team",function(e,a){var t=e.params.team.toLowerCase(),o={};_.indexOf(_.keys(teams_data),t)>-1?(o=teams_data[t],today_data=isThereAGameToday(o),layout="index","nhl"==o.league&&(layout="index_new"),a.render(layout,{title:"Are the "+o.name+" Playing Today?",base_url:"http://"+e.headers.host,team_name:t,team_data:o,team_data_clean:_.omit(o,"schedule","formatted_schedule"),teams_data:teams_data,today_data:today_data,meta_description:"Find out if the "+o.name+" are playing a "+("mlb"==o.league?"baseball":"hockey")+" game today!",favicon_version:FAVICON_VERSION,conf:conf})):a.send("404","not found")}),app.get("/:team/schedule/:month?",function(e,a){var t=e.params.team.toLowerCase(),o={},s=[],n={};if(_.indexOf(_.keys(teams_data),t)>-1){o=teams_data[t],today_data=isThereAGameToday(o),_.each(o.formatted_schedule,function(e){var a=moment(new Date(e.start_date+" "+e.start_time)),t=a.format("MMMM");_.indexOf(s,t)<0&&(s.push(t),n[t]=[]),n[t].push({datetime:a.valueOf(),date_formatted:a.format("dddd M/DD/YYYY"),details:e.against+" at "+e.location+" @ "+a.format("H:mma")})});var r=_.first(_.keys(n)),d=e.params.month?e.params.month.toLowerCase():!1,m=d?!1:r;a.render("schedule",{title:o.name+" "+conf.data_year+" "+(d?_str.capitalize(d):_str.capitalize(r))+" Schedule",base_url:"http://www."+o.track_url,team_name:t,team_data:o,team_data_clean:_.omit(o,"schedule","formatted_schedule"),teams_data:teams_data,today_data:today_data,months:s,games_by_month:n,selected_month:d,is_canonical:m,meta_description:"View the "+conf.data_year+" Schedule for the "+o.name,favicon_version:FAVICON_VERSION,schedule_url:"development"==app.get("env")?"/"+o.slug+"/schedule":"/schedule",conf:conf})}else a.send("404","not found")}),app.get("/games-data/:team",function(e,a){var t=e.params.team.toLowerCase();_.indexOf(_.keys(teams_data),t)>-1?a.json(teams_data[t].schedule):a.json({error:"not found"})}),app.get("/",function(e,a){a.render("listing",{teams:_.keys(teams_data)})}),http.createServer(app).listen(app.get("port"),function(){console.log("Express server listening on port "+app.get("port"))});
+
+var FAVICON_VERSION=2;
+
+/**
+ * Module dependencies.
+ */
+
+var express = require('express');
+var routes = require('./routes');
+var user = require('./routes/user');
+var http = require('http');
+var path = require('path');
+var fs = require('fs');
+var _ = require('underscore');
+var _str = require('underscore.string');
+var moment = require('moment');
+
+var app = express();
+
+// all environments
+app.set('port', 3035);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+app.use(express.logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.methodOverride());
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
+
+var conf = {
+    ads_enabled: true,
+    data_year: 2015
+};
+
+var teams_data = {};
+
+fs.readFile(__dirname + '/teams_data.json', function(err, contents){
+    if (!err){
+        var data = JSON.parse(contents);
+
+        if (data){
+            _.each(data, function(tdata){
+                teams_data[tdata.slug] = _.extend({schedule:[]}, tdata);
+                load_games_data(tdata.slug, true);
+            });
+        }
+    }
+});
+
+var load_games_data = function(team, store){
+    var games = [];
+
+    var fn = function(){
+        if (store){
+            if (!_.has(teams_data, team)){
+                teams_data[team] = {};
+            }
+
+            teams_data[team].schedule = games;
+            teams_data[team].formatted_schedule = [];
+            
+            _.each(games, function(game_data, i){
+                var game = {};
+
+                if (i > 0){
+                    _.each(games[0], function(key, k){
+                        key = key.toLowerCase();
+
+                        game[key] = game_data[k];
+                    });
+
+                    teams_data[team].formatted_schedule.push(game);
+                }
+            });
+        }
+    };
+
+    fs.readFile(__dirname + "/schedules/" + conf.data_year + "_" + team + '.csv', 'UTF-8', function(err, contents){
+        if (!err){
+            _.each(contents.split("\n"), function(line, i){
+                if (!_.isEmpty(line)){
+                    games.push(line.split(","));
+                }
+            });
+
+            fn();
+        }
+    });
+};
+
+function isThereAGameToday(team_data){
+    var now = moment()
+        ,hours_in_1_day = 3600*60*24
+        ,tomorrow = moment().add(1, 'days')
+        ,start_time = null
+        ,end_date = null
+        ,start_hours = 0
+        ,start_minutes = 0
+        ,start_time = ''
+        ,is_there = 'No'
+        ,tweet_text = 'Are the ' + team_data.hashtag + ' playing today? '
+        ,details = ''
+        ,data = team_data.formatted_schedule
+        ,next_game_start_date = null
+        ,day = ''
+        ,start_date = moment(new Date(data[0].start_date + ' ' + data[0].start_time))
+        ,upcoming_games = []
+        ,current_game_idx = 0
+    ;
+
+    if (now.unix() < start_date.unix()){
+        is_there = 'No';
+        if (start_date.get('month') == now.get('month') && start_date.get('date') == now.get('date')){
+            day = 'today';
+        }
+        else if (start_date.get('month') == now.get('month') && start_date.get('date') == now.get('date') + 1){
+            day = 'tomorrow';
+        }
+        else{
+            day = start_date.format('dddd');
+        }
+
+        if (day != "tomorrow" && day != "today"){
+            day = " on " + day;
+        }
+
+        if (team_data.league == "mlb"){
+            details = "Spring training is coming! It starts " + day + ", " + start_date.format('MMMM Do') + " at " + data[0].location + " @ " + start_date.format("h:mma");
+        }
+        else{
+            details = "The season starts " + day + ", " + start_date.format('M/D') + " at the " + data[0].location.substr(0, data[0].location.indexOf(" -"));
+        }
+
+        tweet_text += details;
+    }
+    else{
+        for (var i in data){
+            start_date = moment(new Date(data[i].start_date + ' ' + data[i].start_time));
+            end_date = moment(new Date(data[i].end_date + ' ' + data[i].end_time));
+
+            if (now.format('MMDD') == start_date.format('MMDD')){
+                is_there = 'Yes';
+                tweet_text += 'Yes!';
+
+                if (now.unix() < end_date.unix()){
+                    if (now.unix() > start_date.unix()){
+                        details = 'they\'re playing right now at ' + data[i].location + ' against the ' + data[i].against + '!';
+                        tweet_text += ' Right now against the ' + data[i].against + '! ' + team_data.hashtag_during_game;
+                    }
+                    else{
+                        start_time = start_date.format('h:mma')
+                        details = 'at ' + data[i].location + ' against The ' + data[i].against + ' @ ' + start_time
+                        tweet_text += ' Starting at ' + start_time + ' against the ' + data[i].against;
+                    }
+                }
+                else{
+                    details = 'but it\'s already over.';
+
+                    if (data.length > i){
+                        next_game_start_date = moment(new Date(data[parseInt(i)+1].start_date));
+
+                        if (next_game_start_date != "Invalid Date"){
+                            if (start_date.get('month') == now.get('month') && start_date.get('date') == now.get('date') + 1){
+                                day = 'tomorrow';
+                            }
+                            else{
+                                day = next_game_start_date.format('dddd');
+                            }
+
+                            details += ' The next game is scheduled for ' + day + ' at ' + data[parseInt(i)+1].location + ' @ ' + next_game_start_date.format('h:mma');
+                        }
+                    }
+                }
+
+                current_game_idx = i;
+                break;
+            }
+            else if (is_there.toLowerCase() == "no" && end_date.unix() > now.unix()){ 
+                next_game_start_date = moment(new Date(data[i].start_date + " " + data[i].start_time));
+
+                if (next_game_start_date.isValid()){
+                    if (next_game_start_date.get('day') == now.get('day') + 1){
+                        day = 'tomorrow';
+                    }
+                    else{
+                        day = next_game_start_date.format('dddd');
+                    }
+
+                    details = 'Not today, looks like the next scheduled game is ' + day + ' at ' + data[i].location + ' @ ' + next_game_start_date.format('h:mma');
+                    tweet_text += 'Not today, the next scheduled game is ' + day + ' at ' + data[i].location + ' @ ' + next_game_start_date.format('h:mma');
+                }
+
+                current_game_idx = i;
+                break;
+            }
+        }
+    }
+
+    upcoming_games = data.slice(current_game_idx, parseInt(current_game_idx) + 5);
+
+    _.each(upcoming_games, function(gameday, idx){
+        var start_date = moment(new Date(gameday.start_date + " " + gameday.start_time));
+
+        upcoming_games[idx].datetime = start_date.valueOf();
+        upcoming_games[idx].date_formatted = start_date.format('M/D');
+        if (team_data.league == "mlb"){
+            upcoming_games[idx].details = gameday.against + ' at ' + gameday.location + ' @ ' + start_date.format('h:mma')
+        }
+        else{
+            upcoming_games[idx].details = gameday.against + ' at the ' + gameday.location.substr(0, gameday.location.indexOf(" -")) + '. Puck drops at ' + start_date.format('h:mma')
+        }
+    });
+
+    return {
+        is_there: is_there
+        ,tweet_text: tweet_text
+        ,details: details
+        ,start_date: start_date ? start_date.valueOf() : null
+        ,month: start_date.format('MMMM')
+        ,day: start_date.format('dddd')
+        ,next_game_start_date: next_game_start_date ? next_game_start_date.valueOf() : null
+        ,upcoming_games: upcoming_games
+    };
+};
+
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
+  conf.ads_enabled = false;
+}
+
+app.get('/:team/sitemap', function(req, res){
+    var team = req.params.team.toLowerCase();
+
+    if (_.indexOf(_.keys(teams_data), team) > -1){
+        team_data = teams_data[team];
+
+        res.render('sitemap', {
+            layout: false
+            ,today: moment().format('YYYY-MM-DD')
+            ,base_url: 'http://www.' + team_data.track_url
+            ,conf: conf
+        });
+    }
+    else{
+        res.send('404', 'sorry!');
+    }
+});
+
+app.get('/:team', function(req, res){
+    var team = req.params.team.toLowerCase();
+    var team_data = {};
+
+    if (_.indexOf(_.keys(teams_data), team) > -1){
+        team_data = teams_data[team];
+
+        today_data = isThereAGameToday(team_data);
+
+        layout = "index";
+
+        if (team_data.league == "nhl"){
+            layout = "index_new"; //classic
+        }
+
+        res.render(layout, {
+            title: 'Are the ' + team_data.name + ' Playing Today?'
+            ,base_url: 'http://' + req.headers.host
+            ,team_name: team //poorly named, this is really the slug used for javascript stuff
+            ,team_data: team_data
+            ,team_data_clean: _.omit(team_data, 'schedule', 'formatted_schedule')
+            ,teams_data: teams_data
+            ,today_data: today_data
+            ,meta_description: 'Find out if the ' + team_data.name + ' are playing a ' + (team_data.league == "mlb" ? "baseball" : "hockey") + ' game today!'
+            ,favicon_version: FAVICON_VERSION
+            ,conf: conf
+        });
+    }
+    else{
+        res.send('404', 'not found');
+    }
+});
+
+app.get('/:team/schedule/:month?', function(req, res){
+    var team = req.params.team.toLowerCase();
+    var team_data = {};
+    var months = [];
+    var games_by_month = {};
+
+    if (_.indexOf(_.keys(teams_data), team) > -1){
+        team_data = teams_data[team];
+        today_data = isThereAGameToday(team_data);
+
+        _.each(team_data.formatted_schedule, function(gameday){
+            var start_date = moment(new Date(gameday.start_date + " " + gameday.start_time));
+            var month_name = start_date.format('MMMM');
+
+            if (_.indexOf(months, month_name) < 0){
+                months.push(month_name);
+                games_by_month[month_name] = [];
+            }
+
+            games_by_month[month_name].push({
+                datetime: start_date.valueOf()
+                ,date_formatted: start_date.format('dddd M/DD/YYYY')
+                ,details: gameday.against + ' at ' + gameday.location + ' @ ' + start_date.format('H:mma')
+            });
+        });
+
+        var first_month = _.first(_.keys(games_by_month));
+        var selected_month = req.params.month ? req.params.month.toLowerCase() : false;
+        var is_canonical = selected_month ? false : first_month;
+
+        res.render('schedule', {
+            title: team_data.name + " " + conf.data_year + " " + (selected_month ? _str.capitalize(selected_month) : _str.capitalize(first_month)) + " Schedule"
+            ,base_url: 'http://www.' + team_data.track_url
+            ,team_name: team //poorly named, this is really the slug used for javascript stuff
+            ,team_data: team_data
+            ,team_data_clean: _.omit(team_data, 'schedule', 'formatted_schedule')
+            ,teams_data: teams_data
+            ,today_data: today_data
+            ,months: months
+            ,games_by_month: games_by_month
+            ,selected_month: selected_month
+            ,is_canonical: is_canonical
+            ,meta_description: 'View the ' + conf.data_year + ' Schedule for the ' + team_data.name
+            ,favicon_version: FAVICON_VERSION
+            ,schedule_url: app.get('env') == "development" ? "/" + team_data.slug + "/schedule" : "/schedule"
+            ,conf: conf
+        });
+    }
+    else{
+        res.send('404', 'not found');
+    }
+});
+
+app.get('/games-data/:team', function(req, res){
+    var team_name = req.params.team.toLowerCase()
+    if (_.indexOf(_.keys(teams_data), team_name) > -1){
+        res.json(teams_data[team_name].schedule);
+    }
+    else{
+        res.json({ error: 'not found' });
+    }
+});
+
+app.get('/', function(req, res){
+    res.render('listing', {
+        teams: _.keys(teams_data)
+    });
+});
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
+
+

@@ -1,3 +1,4 @@
+
 var FAVICON_VERSION=2;
 
 /**
@@ -110,18 +111,25 @@ function isThereAGameToday(team_data){
 
     if (now.unix() < start_date.unix()){
         is_there = 'No';
-        if (start_date.get('month') == now.get('month') && start_date.get('date') == now.get('date') + 1){
+        if (start_date.get('month') == now.get('month') && start_date.get('date') == now.get('date')){
+            day = 'today';
+        }
+        else if (start_date.get('month') == now.get('month') && start_date.get('date') == now.get('date') + 1){
             day = 'tomorrow';
         }
         else{
             day = start_date.format('dddd');
         }
 
+        if (day != "tomorrow" && day != "today"){
+            day = " on " + day;
+        }
+
         if (team_data.league == "mlb"){
-            details = "Spring training is coming! It starts " + (day != "tomorrow" ? "on" : "") + day + ", " + start_date.format('MMMM Do') + " at " + data[0].location + " @ " + start_date.format("h:mma");
+            details = "Spring training is coming! It starts " + day + ", " + start_date.format('MMMM Do') + " at " + data[0].location + " @ " + start_date.format("h:mma");
         }
         else{
-            details = "The season starts " + (day != "tomorrow" ? "on" : "") + day + ", " + start_date.format('M/D') + " at the " + data[0].location.substr(0, data[0].location.indexOf(" -"));
+            details = "The season starts " + day + ", " + start_date.format('M/D') + " at the " + data[0].location.substr(0, data[0].location.indexOf(" -"));
         }
 
         tweet_text += details;
