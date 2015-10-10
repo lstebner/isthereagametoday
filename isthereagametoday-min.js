@@ -299,6 +299,9 @@ if ('development' == app.get('env')) {
   conf.ads_enabled = false;
   mongoose.connect("mongodb://localhost/isthereagametoday");
 }
+else{
+  mongoose.connect("mongodb://localhost/isthereagametoday");
+}
 
 app.get('/:team/sitemap', function(req, res){
     var team = req.params.team.toLowerCase();
