@@ -1,21 +1,8 @@
+// @codekit-prepend "DataCache.js";
+// @codekit-prepend "includes.js";
 
 var FAVICON_VERSION=2;
 
-/**
- * Module dependencies.
- */
-
-var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
-var fs = require('fs');
-var _ = require('underscore');
-var _str = require('underscore.string');
-var moment = require('moment');
-
-var app = express();
 
 // all environments
 app.set('port', 3035);
@@ -33,61 +20,12 @@ var conf = {
     data_year: 2015
 };
 
-var teams_data = {};
-
-fs.readFile(__dirname + '/teams_data.json', function(err, contents){
-    if (!err){
-        var data = JSON.parse(contents);
-
-        if (data){
-            _.each(data, function(tdata){
-                teams_data[tdata.slug] = _.extend({schedule:[]}, tdata);
-                load_games_data(tdata.slug, true);
-            });
-        }
-    }
-});
-
-var load_games_data = function(team, store){
-    var games = [];
-
-    var fn = function(){
-        if (store){
-            if (!_.has(teams_data, team)){
-                teams_data[team] = {};
-            }
-
-            teams_data[team].schedule = games;
-            teams_data[team].formatted_schedule = [];
-            
-            _.each(games, function(game_data, i){
-                var game = {};
-
-                if (i > 0){
-                    _.each(games[0], function(key, k){
-                        key = key.toLowerCase();
-
-                        game[key] = game_data[k];
-                    });
-
-                    teams_data[team].formatted_schedule.push(game);
-                }
-            });
-        }
-    };
-
-    fs.readFile(__dirname + "/schedules/" + conf.data_year + "_" + team + '.csv', 'UTF-8', function(err, contents){
-        if (!err){
-            _.each(contents.split("\n"), function(line, i){
-                if (!_.isEmpty(line)){
-                    games.push(line.split(","));
-                }
-            });
-
-            fn();
-        }
-    });
+var refresh_teams_data = function(){
+    team_cache = new TeamsDataCache();
+    team_cache.refresh();
 };
+
+// refresh_teams_data();
 
 function isThereAGameToday(team_data){
     var now = moment()
@@ -228,13 +166,19 @@ function isThereAGameToday(team_data){
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
   conf.ads_enabled = false;
+  mongoose.connect("mongodb://localhost/isthereagametoday");
+}
+else{
+  mongoose.connect("mongodb://localhost/isthereagametoday");
 }
 
 app.get('/:team/sitemap', function(req, res){
     var team = req.params.team.toLowerCase();
 
-    if (_.indexOf(_.keys(teams_data), team) > -1){
-        team_data = teams_data[team];
+    DataCacheFetcher.get(team + "_team_data", function(team_data){
+        if (!team_data){
+            return res.send('404', 'sorry!');
+        }
 
         res.render('sitemap', {
             layout: false
@@ -242,18 +186,17 @@ app.get('/:team/sitemap', function(req, res){
             ,base_url: 'http://www.' + team_data.track_url
             ,conf: conf
         });
-    }
-    else{
-        res.send('404', 'sorry!');
-    }
+    });
 });
 
 app.get('/:team', function(req, res){
     var team = req.params.team.toLowerCase();
     var team_data = {};
 
-    if (_.indexOf(_.keys(teams_data), team) > -1){
-        team_data = teams_data[team];
+    DataCacheFetcher.get(team + "_team_data", function(team_data){
+        if (!team_data){
+            return res.send('404', 'not found');
+        }
 
         today_data = isThereAGameToday(team_data);
 
@@ -269,16 +212,12 @@ app.get('/:team', function(req, res){
             ,team_name: team //poorly named, this is really the slug used for javascript stuff
             ,team_data: team_data
             ,team_data_clean: _.omit(team_data, 'schedule', 'formatted_schedule')
-            ,teams_data: teams_data
             ,today_data: today_data
             ,meta_description: 'Find out if the ' + team_data.name + ' are playing a ' + (team_data.league == "mlb" ? "baseball" : "hockey") + ' game today!'
             ,favicon_version: FAVICON_VERSION
             ,conf: conf
         });
-    }
-    else{
-        res.send('404', 'not found');
-    }
+    });
 });
 
 app.get('/:team/schedule/:month?', function(req, res){
@@ -287,8 +226,11 @@ app.get('/:team/schedule/:month?', function(req, res){
     var months = [];
     var games_by_month = {};
 
-    if (_.indexOf(_.keys(teams_data), team) > -1){
-        team_data = teams_data[team];
+    DataCacheFetcher.get(team + "_team_data", function(team_data){
+        if (!team_dat){
+            return res.send('404', 'not found');
+        }
+
         today_data = isThereAGameToday(team_data);
 
         _.each(team_data.formatted_schedule, function(gameday){
@@ -317,7 +259,6 @@ app.get('/:team/schedule/:month?', function(req, res){
             ,team_name: team //poorly named, this is really the slug used for javascript stuff
             ,team_data: team_data
             ,team_data_clean: _.omit(team_data, 'schedule', 'formatted_schedule')
-            ,teams_data: teams_data
             ,today_data: today_data
             ,months: months
             ,games_by_month: games_by_month
@@ -328,25 +269,17 @@ app.get('/:team/schedule/:month?', function(req, res){
             ,schedule_url: app.get('env') == "development" ? "/" + team_data.slug + "/schedule" : "/schedule"
             ,conf: conf
         });
-    }
-    else{
-        res.send('404', 'not found');
-    }
+    });
 });
 
 app.get('/games-data/:team', function(req, res){
     var team_name = req.params.team.toLowerCase()
-    if (_.indexOf(_.keys(teams_data), team_name) > -1){
-        res.json(teams_data[team_name].schedule);
-    }
-    else{
-        res.json({ error: 'not found' });
-    }
-});
+    DataCacheFetcher.get(team + "_team_data", function(team_data){
+        if (!team_data){
+            return res.json({ error: 'not found' });
+        }
 
-app.get('/', function(req, res){
-    res.render('listing', {
-        teams: _.keys(teams_data)
+        res.json(team_data.schedule);
     });
 });
 

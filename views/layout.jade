@@ -68,16 +68,17 @@ html
                     .ad-unit
                         include ad.html
 
-                .other-teams
-                    p Check if these other teams are playing around the league
+                if typeof(teams_data) != "undefined"
+                    .other-teams
+                        p Check if these other teams are playing around the league
 
-                    ul
-                        for team in teams_data
-                            if team.slug != team_name
-                                li(class="team-#{team.slug}")
-                                    a(href="http://www." + team.track_url, data-team=team.slug, data-team_color=team.primary_color)
-                                        i(class="bb-#{team.abbr} team-logo", title=team.name)
-                                        //- span &bull;
+                        ul
+                            for team in teams_data
+                                if team.slug != team_name
+                                    li(class="team-#{team.slug}")
+                                        a(href="http://www." + team.track_url, data-team=team.slug, data-team_color=team.primary_color)
+                                            i(class="bb-#{team.abbr} team-logo", title=team.name)
+                                            //- span &bull;
 
 
 
